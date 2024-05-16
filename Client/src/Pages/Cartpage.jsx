@@ -34,7 +34,7 @@ const Cartpage = () => {
 
               <div className="mt-20">
                 <p className="text-xl text-[#166534] uppercase font-[600]">Your Cart</p>
-                <p className="text-5xl font-[600] text-[#15803d] uppercase mb-4">Summary</p>
+                <p className="text-5xl font-[600] text-[#15803d] uppercase mb-4">summary</p>
                 <p className="font-[600] text-xl text-slate-700">
                   Total Items: <span className="font-normal">{user.cart.length}</span>
                 </p>
