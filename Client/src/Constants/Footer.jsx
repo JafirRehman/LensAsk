@@ -2,64 +2,44 @@ import React from "react";
 import "../styles/Footer.scss";
 import { FaLocationArrow, FaMobileAlt, FaEnvelope } from "react-icons/fa";
 import Payment from "../assets/payments.png";
+import {useNavigate} from "react-router-dom";
+
 const Footer = () => {
+    const navigate=useNavigate()
     return (
         <div className="footer">
             <div className="footer-content">
                 <div className="col">
                     <div className="title">About</div>
                     <div className="text">
-                        Voluptatem accusantium doloremque laudantium, totam rem
-                        aperiam, eaque ipsa quae ab illo inventore veritatis et
-                        quasi architecto beatae vitae dicta sunt explicabo eaque
-                        ipsa quae ab illo.
+                        At OurLens, we are dedicated to providing you with the highest quality lenses. Our passion for vision drives us to deliver top-notch products that cater to a variety of needs. Whether you're looking for daily wear lenses, colored lenses, or specialty lenses, we've got you covered. Our commitment to eye care goes beyond providing lenses - we strive to educate our customers and promote eye health. Experience the OurLens difference today.
                     </div>
                 </div>
                 <div className="col">
                     <div className="title">Contact</div>
                     <div className="c-item">
-                        <FaLocationArrow />
-                        <div className="text">
-                            Kayaloram Rd, Punnamada, Kottankulangara, Alappuzha,
-                            Kerala, 688006
-                        </div>
-                    </div>
-                    <div className="c-item">
                         <FaMobileAlt />
-                        <div className="text">Phone: 0471 272 0261</div>
+                        <div className="text">Phone: 0308-9079661</div>
                     </div>
                     <div className="c-item">
                         <FaEnvelope />
-                        <div className="text">Email: store@jsdev.com</div>
+                        <div className="text">Email: rjafirmalana@gmail.com</div>
                     </div>
                 </div>
                 <div className="col">
                     <div className="title">Categories</div>
-                    <span className="text">Headphones</span>
-                    <span className="text">Smart Watches</span>
-                    <span className="text">Bluetooth Speakers</span>
-                    <span className="text">Wireless Earbuds</span>
-                    <span className="text">Home Theatre</span>
-                    <span className="text">Projectors</span>
+                    <span className="text">Gucci</span>
+                    <span className="text">RayBan</span>
+                    <span className="text">Dior</span>
+                    <span className="text">Celine</span>
                 </div>
                 <div className="col">
                     <div className="title">Pages</div>
-                    <span className="text">Home</span>
-                    <span className="text">About</span>
-                    <span className="text">Privacy Policy</span>
-                    <span className="text">Returns</span>
-                    <span className="text">Terms & Conditions</span>
-                    <span className="text">Contact Us</span>
+                    <span onClick={()=> navigate('/')} className="text">Home</span>
+                    <span onClick={()=> navigate('/products')} className="text">Products</span>
                 </div>
             </div>
-            <div className="bottom-bar">
-                <div className="bottom-bar-content">
-                    <span className="text">
-                        Lenskart 2024 <i class="fa fa-copyright" aria-hidden="true"></i> All Rights Reserved
-                    </span>
-                    <img src={Payment} />
-                </div>
-            </div>
+            
         </div>
     );
 };
