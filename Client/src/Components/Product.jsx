@@ -39,7 +39,7 @@ const Product = ({ post }) => {
                     <div className=" absolute rounded-full top-5 right-2 bg-[#0E0E11] text-ourred-50 animate-bounce text-white px-2 py-1 z-10 text-xs font-bold uppercase">New</div>
                 }
                 <div className="absolute opacity-0 hover:opacity-100 backdrop-blur-md bg-white/30 flex flex-col gap-5 justify-center items-center w-full h-full">
-                    <button onClick={()=> navigate('/productsdetails')} className='text-gray-700 border-2 border-gray-700 rounded-md font-semibold text-[12px] h-7 w-32 uppercase hover:bg-gray-700 hover:text-white transition duration-300 ease-in'>Details</button>
+                    <button onClick={() => navigate(`/productsdetails/${post._id}`)} className='text-gray-700 border-2 border-gray-700 rounded-md font-semibold text-[12px] h-7 w-32 uppercase hover:bg-gray-700 hover:text-white transition duration-300 ease-in'>Details</button>
                     {
                         usercart?.length > 0 && usercart?.some((pro) => pro._id === post._id) ?
                             (<button
