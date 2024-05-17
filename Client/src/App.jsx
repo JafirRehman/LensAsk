@@ -15,13 +15,13 @@ import Adminheader from './Components/Admin/Adminheader.jsx';
 import Orderspage from './Pages/Admin/Orderspage.jsx';
 import CreateOrderpage from './Pages/Customer/CreateOrderpage.jsx';
 import Createproductpage from './Pages/Admin/Createproductpage.jsx';
-
+import ScrollToTop from './Constants/ScrollToTop.jsx';
 
 const App = () => {
   const userState = useSelector(state => state.user)
   return (
     <BrowserRouter>
-      
+      <ScrollToTop />
       <Toaster />
       {
         userState && userState.user?.role === "Admin" ? <Adminheader /> : <Header />
