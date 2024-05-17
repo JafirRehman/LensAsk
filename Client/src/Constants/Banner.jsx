@@ -1,8 +1,9 @@
 import React from "react";
-
+import {useNavigate} from "react-router-dom";
 import "../styles/Banner.scss";
 
 const Banner = () => {
+    const navigate=useNavigate()
     return (
         <div className="hero-banner">
 
@@ -10,12 +11,11 @@ const Banner = () => {
                 <div className="text-content">
                     <h1>Style meets vision.</h1>
                     <p>
-                        40% off premium clear and sun prescription lenses, from regular and thin Persol
-                        Signature lenses to our top line of Premium Glass lenses by Barberini®.
+                        premium clear and sun prescription lenses, from regular and thin Persol
+                        Signature lenses to our top line of Premium Glass lenses.
                     </p>
                     <div className="ctas">
-                        <div className="banner-cta">Read More</div>
-                        <div className="banner-cta v2">Shop Now</div>
+                        <button onClick={()=> navigate("/products")} className="banner-cta v2">Shop Now</button>
                     </div>
                 </div>
 
