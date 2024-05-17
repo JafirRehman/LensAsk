@@ -20,16 +20,16 @@ const Adminheader = () => {
                 className="main-header sticky-header">
                 <div className="header-content">
                     <ul className="left">
-                        <li onClick={() => navigate('/products')}>All Products</li>
-                        <li onClick={() => navigate('/user/allorders')}>All Orders</li>
-                        <li onClick={() => navigate('/user/createproduct')}>Create Product</li>
+                        <li className="hover:border-b-2 hover:opacity-[0.6]" onClick={() => navigate('/products')}>All Products</li>
+                        <li className="hover:border-b-2 hover:opacity-[0.6]" onClick={() => navigate('/user/allorders')}>All Orders</li>
+                        <li className="hover:border-b-2 hover:opacity-[0.6]" onClick={() => navigate('/user/createproduct')}>Create Product</li>
                     </ul>
                     <div className="center" onClick={() => navigate("/")}>
                         <img src={Logoimg} width={250} />
                     </div>
                     {userState.user &&
                         <div className="right cursor-pointer">
-                            <button onClick={logoutfunc}>Logout</button>
+                            <button className="hover:border-b-2 hover:opacity-[0.6]" onClick={logoutfunc}>Logout</button>
                             <button onClick={()=> navigate("/user/profile")} className="flex items-center justify-between p-4 bg-zinc-200 dark:bg-zinc-800">
                                 <img src={userState.user.image} alt="Profile Picture" className="w-10 h-10 rounded-full" />
                             </button>
