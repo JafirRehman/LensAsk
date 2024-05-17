@@ -2,7 +2,6 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home.jsx';
 import Header from './Constants/Header.jsx';
-import Newsletter from './Constants/Newsletter.jsx';
 import Footer from './Constants/Footer.jsx';
 import Products from './Pages/Products.jsx';
 import { Toaster } from 'react-hot-toast';
