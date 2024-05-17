@@ -18,26 +18,27 @@ import Createproductpage from './Pages/Admin/Createproductpage.jsx';
 
 
 const App = () => {
-  const userState=useSelector(state=> state.user)
+  const userState = useSelector(state => state.user)
   return (
     <BrowserRouter>
-      {
-        userState && userState.user?.role === "Admin" ? <Adminheader/> : <Header/>
-      }
+      
       <Toaster />
+      {
+        userState && userState.user?.role === "Admin" ? <Adminheader /> : <Header />
+      }
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path="/products" element={<Products/>} />
-        <Route exact path="/login" element={<Loginpage/>} />
-        <Route exact path="/signup" element={<Signuppage/>} />
-        <Route exact path="/customer/cart" element={<Cartpage/>} />
-        <Route exact path="/user/profile" element={<Profilepage/>} />
+        <Route exact path="/products" element={<Products />} />
+        <Route exact path="/login" element={<Loginpage />} />
+        <Route exact path="/signup" element={<Signuppage />} />
+        <Route exact path="/customer/cart" element={<Cartpage />} />
+        <Route exact path="/user/profile" element={<Profilepage />} />
         <Route exact path="/user/allorders" element={<Orderspage />} />
-        <Route exact path="/user/cart/order" element={<CreateOrderpage/>} />
-        <Route exact path="/user/createproduct" element={<Createproductpage/>} />
+        <Route exact path="/user/cart/order" element={<CreateOrderpage />} />
+        <Route exact path="/user/createproduct" element={<Createproductpage />} />
       </Routes>
       <Newsletter />
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   )
 }
