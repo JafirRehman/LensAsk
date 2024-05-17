@@ -16,7 +16,7 @@ import CreateOrderpage from './Pages/Customer/CreateOrderpage.jsx';
 import Createproductpage from './Pages/Admin/Createproductpage.jsx';
 import ScrollToTop from './Constants/ScrollToTop.jsx';
 import Newsletter from './Constants/Newsletter.jsx';
-
+import ProductDetails from './Pages/ProductDetails.jsx';
 
 const App = () => {
   const userState = useSelector(state => state.user)
@@ -30,6 +30,7 @@ const App = () => {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/products" element={<Products />} />
+        <Route exact path="/productsdetails" element={<ProductDetails />} />
         <Route exact path="/login" element={<Loginpage />} />
         <Route exact path="/signup" element={<Signuppage />} />
         <Route exact path="/customer/cart" element={<Cartpage />} />
@@ -37,6 +38,7 @@ const App = () => {
         <Route exact path="/user/allorders" element={<Orderspage />} />
         <Route exact path="/user/cart/order" element={<CreateOrderpage />} />
         <Route exact path="/user/createproduct" element={<Createproductpage />} />
+
       </Routes>
       <Newsletter />
       <Footer />

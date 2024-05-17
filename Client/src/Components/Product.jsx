@@ -31,28 +31,44 @@ const Product = ({ post }) => {
     }
 
     return (
-        <div className="flex flex-col items-center justify-between w-full gap-3 p-2 rounded-xl  shadow-lg hover:shadow-2xl hover:scale-[1.03] md:hover:scale-[1.05] transition ease-in">
-            <div className="h-[180px] relative">
-                <img src={post.image} className="mix-blend-multiply h-full w-full" alt="" />
+        <div className="flex flex-col w-full gap-3 hover:shadow-2xl hover:scale-[1.03] md:hover:scale-[1.05] transition ease-in">
+            <div className="bg-[#F2F2F2] h-[300px] relative flex items-center justify-center">
+                <img src={post.image} className="opacity-100 hover:opacity-0 mix-blend-multiply h-[170px] w-[170px]" alt="" />
                 {
                     differenceInHours(new Date(), parseISO(post.createdAt)) <= 24 &&
-                    <div className="absolute rounded-full top-5 right-2 bg-[#60d400] text-ourred-50 animate-bounce text-white px-2 py-1 z-10 text-xs font-bold uppercase">New</div>
+                    <div className=" absolute rounded-full top-5 right-2 bg-[#0E0E11] text-ourred-50 animate-bounce text-white px-2 py-1 z-10 text-xs font-bold uppercase">New</div>
                 }
+                <div className="absolute opacity-0 hover:opacity-100 backdrop-blur-md bg-white/30 flex flex-col gap-5 justify-center items-center w-full h-full">
+                    <button onClick={()=> navigate('/productsdetails')} className='text-gray-700 border-2 border-gray-700 rounded-md font-semibold text-[12px] h-7 w-32 uppercase hover:bg-gray-700 hover:text-white transition duration-300 ease-in'>Details</button>
+                    {
+                        usercart?.length > 0 && usercart?.some((pro) => pro._id === post._id) ?
+                            (<button
+                                className="text-gray-700 border-2 border-gray-700 rounded-md font-semibold text-[12px] h-7 w-32 uppercase hover:bg-gray-700 hover:text-white transition duration-300 ease-in"
+                                onClick={() => { removefromCart(post._id) }}>
+                                Remove&nbsp;Item
+                            </button>) :
+                            (<button
+                                className="text-gray-700 border-2 border-gray-700 rounded-md font-semibold text-[12px] h-7 w-32 uppercase hover:bg-gray-700 hover:text-white transition duration-300 ease-in"
+                                onClick={() => { addToCart(post._id) }}>
+                                Add&nbsp;to&nbsp;Cart
+                            </button>)
+                    }
+
+                </div>
             </div>
-            <div>
-                <p className="text-[#1d783e] font-semibold text-lg text-left truncate w-40 mt-1">
+            <div className='text-[1rem]'>
+                <p className="font-bold  text-left truncate w-40 mt-1">
                     {post.title}
                 </p>
+                <p className="text-green-600 font-semibold">Rs. {post.price}</p>
             </div>
-            <div>
-                <p className="w-40 text-gray-400 font-normal text-[10px] text-left">
-                    {post.description.split(" ").slice(0, 10).join(" ") + "..."}
-                </p>
-            </div>
-            <div className="flex justify-between items-center w-full mt-5">
-                <div>
-                    <p className="text-green-600 font-semibold">${post.price}</p>
-                </div>
+        </div>
+    );
+};
+
+export default Product;
+
+/**<div className="absolute bg-ourred-500 flex justify-between items-center w-full h-full">
                 {
                     usercart?.length > 0 && usercart?.some((pro) => pro._id === post._id) ?
                         (<button
@@ -66,9 +82,4 @@ const Product = ({ post }) => {
                             Add&nbsp;to&nbsp;Cart
                         </button>)
                 }
-            </div>
-        </div>
-    );
-};
-
-export default Product;
+            </div> */
