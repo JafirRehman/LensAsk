@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const ProductsSlide = ({ productsState }) => {
     const navigate=useNavigate()
     return (
-        <div className='bg-[#c1c1ce5b] pb-16'>
+        <div className=' pb-16'>
             <div className="pt-20 pb-12 w-full inline-flex flex-nowrap overflow-hidden">
                 <div className="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll">
                     {

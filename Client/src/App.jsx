@@ -15,6 +15,7 @@ import Orderspage from './Pages/Admin/Orderspage.jsx';
 import CreateOrderpage from './Pages/Customer/CreateOrderpage.jsx';
 import Createproductpage from './Pages/Admin/Createproductpage.jsx';
 import ScrollToTop from './Constants/ScrollToTop.jsx';
+import Newsletter from './Constants/Newsletter.jsx';
 
 const App = () => {
   const userState = useSelector(state => state.user)
