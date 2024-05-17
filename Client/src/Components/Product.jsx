@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addtocartThunk } from '../redux/Slices/UserSlice';
 import { removefromcartThunk } from '../redux/Slices/UserSlice';
+import { differenceInHours, parseISO } from 'date-fns';
 
 const Product = ({ post }) => {
     const userState = useSelector((state) => state.user);
@@ -31,8 +32,12 @@ const Product = ({ post }) => {
 
     return (
         <div className="flex flex-col items-center justify-between w-full gap-3 p-2 rounded-xl  shadow-lg hover:shadow-2xl hover:scale-[1.03] md:hover:scale-[1.05] transition ease-in">
-            <div className="h-[180px]">
+            <div className="h-[180px] relative">
                 <img src={post.image} className="mix-blend-multiply h-full w-full" alt="" />
+                {
+                    differenceInHours(new Date(), parseISO(post.createdAt)) <= 24 &&
+                    <div className="absolute rounded-full top-5 right-2 bg-[#60d400] text-ourred-50 animate-bounce text-white px-2 py-1 z-10 text-xs font-bold uppercase">New</div>
+                }
             </div>
             <div>
                 <p className="text-[#1d783e] font-semibold text-lg text-left truncate w-40 mt-1">
