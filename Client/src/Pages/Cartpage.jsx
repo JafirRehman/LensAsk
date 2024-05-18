@@ -26,7 +26,7 @@ const Cartpage = () => {
             <div className="lg:w-[70%]">
               {
                 user.cart.map((item, index) => {
-                  return <CartItem key={item._id} item={item} isLoading={userState.isLoading} itemIndex={index} />
+                  return <CartItem key={item._id} item={item} itemIndex={index} />
                 })
               }
             </div>

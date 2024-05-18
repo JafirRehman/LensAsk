@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
-const CartItem = ({ item, isLoading }) => {
+const CartItem = ({ item }) => {
 
     const userState = useSelector((state) => state.user);
 
