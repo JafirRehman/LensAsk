@@ -40,14 +40,6 @@ const Products = () => {
                             <option value='dior'>Dior</option>
                             <option value='celine'>Celine</option>
                         </select>
-                        <select onChange={(e) => setPrice(e.target.value)} value={price} id="pricefilter" name="pricefilter" className="select select-bordered w-full sm:max-w-[20%]">
-                            <option value='700'>All Price Ranges</option>
-                            <option value='200'>200</option>
-                            <option value='300'>300</option>
-                            <option value='400'>400</option>
-                            <option value='500'>500</option>
-                            <option value='500'>600</option>
-                        </select>
                         <div className="mb-3 w-full sm:max-w-[20%]">
                             <div className="relative mb-4 flex w-full items-stretch">
                                 <input
@@ -78,6 +70,14 @@ const Products = () => {
                                 </span>
                             </div>
                         </div>
+                        <select onChange={(e) => setPrice(e.target.value)} value={price} id="pricefilter" name="pricefilter" className="select select-bordered w-full sm:max-w-[20%]">
+                            <option value='700'>All Price Ranges</option>
+                            <option value='200'>200</option>
+                            <option value='300'>300</option>
+                            <option value='400'>400</option>
+                            <option value='500'>500</option>
+                            <option value='500'>600</option>
+                        </select>
                     </div>
                     <div className="flex justify-center flex-col mobile:flex-row mobile:flex-wrap gap-5 items-center max-w-6xl p-6 mx-auto my-7 min-h-[80vh]">
                         {

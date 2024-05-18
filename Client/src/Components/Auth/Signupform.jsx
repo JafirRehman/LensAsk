@@ -52,18 +52,18 @@ const Signupform = () => {
         }
     }
     return (
-        <div>
+        <div className='bg-[#F1F2F3] px-32 py-10 self-start mt-7'>
             <form onSubmit={formhandler} className='flex flex-col text-[1.2rem] mobile:text-[1.2rem]'>
                 <label htmlFor='name' className='mt-2 mb-2'>Name<span className='text-ourred-500'>*</span></label>
-                <input onChange={changeformvalues} name='name' value={formdata.name} required id='name' className=' border mb-5 border-ourred-500 text-[1rem] rounded-xl h-[50px] p-5 focus:outline-none text-white focus:border-ourred-900' type='text' placeholder='Enter name'></input>
+                <input onChange={changeformvalues} name='name' value={formdata.name} required id='name' className=' mb-5 text-[1rem] h-[50px] p-5 focus:outline-none text-white' type='text' placeholder='Enter name'></input>
                 <label htmlFor='email' className='mt-2 mb-2'>Email Address<span className='text-ourred-500'>*</span></label>
-                <input onChange={changeformvalues} name='email' value={formdata.email} required id='email' className=' border border-ourred-500 text-[1rem] rounded-xl h-[50px] p-5 focus:outline-none text-white focus:border-ourred-900' type='email' placeholder='Enter Email Address'></input>
+                <input onChange={changeformvalues} name='email' value={formdata.email} required id='email' className=' text-[1rem] h-[50px] p-5 focus:outline-none text-white' type='email' placeholder='Enter Email Address'></input>
                 <label htmlFor='password' className='mt-5 mb-2'>Password<span className='text-ourred-500'>*</span></label>
                 <div className='relative'>
-                    <button type='button' onClick={changepasswordtype}>{passwordtype === "password" ? <IoMdEye className='text-ourred-500 absolute top-4 right-2 text-[1.5rem] ' /> : <IoMdEyeOff className='text-ourred-500 absolute top-4 right-2 text-[1.5rem] ' />}</button>
-                    <input onChange={changeformvalues} name='password' value={formdata.password} id='password' required maxLength={15} className=' border border-ourred-500 rounded-xl h-[50px] p-5 focus:outline-none text-[1rem] w-72 focus:border-ourred-900' type={passwordtype} placeholder='Enter Password'></input>
+                    <button type='button' onClick={changepasswordtype}>{passwordtype === "password" ? <IoMdEye className='text-[#0E0E11] absolute top-4 right-2 text-[1.5rem] ' /> : <IoMdEyeOff className='text-[#0E0E11] absolute top-4 right-2 text-[1.5rem] ' />}</button>
+                    <input onChange={changeformvalues} name='password' value={formdata.password} id='password' required maxLength={15} className=' h-[50px] p-5 focus:outline-none text-[1rem] w-72' type={passwordtype} placeholder='Enter Password'></input>
                 </div>
-                <button type='submit' className=' flex items-center justify-center text-ourred-50 mt-10 bg-ourred-600 hover:bg-ourred-800 text-[1.2rem] font-bold sm:text-[1.5rem] pt-5 pb-5 max-h-9 min-h-9 rounded-xl hover:scale-[0.93] transition-transform duration-300'>
+                <button type='submit' className=' flex items-center justify-center text-ourred-50 mt-10 bg-[#0E0E11] text-[1.2rem] sm:text-[1.5rem] pt-5 pb-5 max-h-9 min-h-9 hover:scale-[0.93] transition-transform duration-300'>
                     {isloading ? (
                         <Spinner/>
                     ) : (

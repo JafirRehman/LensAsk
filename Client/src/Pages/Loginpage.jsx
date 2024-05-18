@@ -3,7 +3,7 @@ import AuthTemplate from '../Components/Auth/AuthTemplate'
 
 const LoginPage = () => {
     return (
-        <AuthTemplate title='Welcome Back' formtype='Login' />
+        <AuthTemplate formtype='Login' />
     )
 }
 export default LoginPage
