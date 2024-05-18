@@ -9,7 +9,9 @@
         margin: 0 auto;
         display: flex;
         flex-flow: wrap;
+        justify-content: space-between;
         gap: 20px;
+        width: 100%;
 
         @include md {
             justify-content: space-between;
