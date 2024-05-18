@@ -1,14 +1,17 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Spinner from '../Components/Spinner';
 import { useDispatch } from 'react-redux';
 import { addtocartThunk } from '../redux/Slices/UserSlice';
 import { removefromcartThunk } from '../redux/Slices/UserSlice';
-
+import toast from 'react-hot-toast';
 const ProductDetails = () => {
   const { productid } = useParams();
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const userState = useSelector((state) => state.user);
   const usercart = userState.user.cart;
@@ -17,7 +20,7 @@ const ProductDetails = () => {
   const product = products.find(product => product._id === productid)
 
   const addToCart = (productId) => {
-    if (userState.user) {
+    if (userState?.user) {
       dispatch(addtocartThunk(productId));
     } else {
       toast.error("Please login to add items to cart");
