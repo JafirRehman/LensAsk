@@ -1,5 +1,32 @@
-
+const Subscriber = require('./models/Subscriber');
 const Product = require('../models/Product')
+
+//subscribe
+exports.subscribe = async (req, res) => {
+    const { email }=req.body;
+    try {
+
+        const findsubcriber = await Subscriber.findOne({ email })
+        if (findsubcriber) {
+            return res.status(400).json({
+                success: false,
+                message: 'User Already Registered!',
+            });
+        }
+
+        await Subscriber.create({ email });
+
+        return res.status(200).json({
+            success: true,
+            message: 'Subscribed Successfully',
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: 'Server error'
+        });
+    }
+};
 
 //getAllProducts
 exports.GetAllProducts = async (req, res) => {

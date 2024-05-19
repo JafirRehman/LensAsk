@@ -1,10 +1,10 @@
 require("dotenv").config();
 const { FOLDER_NAME } = process.env;
-
+const { mailsender } = require('../utils/mailsender');
 const Order = require("../models/Order");
 const Product = require("../models/Product");
-
 const { filesendtocloudinary } = require('../utils/filesendtocloudinary')
+const Subscriber = require('../models/Subscriber')
 
 // get all orders
 exports.getAllOrders = async (req, res) => {
@@ -94,7 +94,19 @@ exports.createProduct = async (req, res) => {
             image: result.secure_url,
             category,
         });
-        // Return the new course and a success message
+        //send mail to all subscribers
+        try {
+            const subscribers = await Subscriber.find({});
+            for (let subscriber of subscribers) {
+                await mailsender(subscriber.email, newProduct);
+            }
+        } catch (error) {
+            return res.status(500).json({
+                success: false,
+                message: "Cant Send Mail"
+            })
+        }
+        // Return the new Product and a success message
         return res.status(200).json({
             success: true,
             data: newProduct,
