@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { FOLDER_NAME } = process.env;
 
-const Order=require("../models/Order");
+const Order = require("../models/Order");
 const Product = require("../models/Product");
 
 const { filesendtocloudinary } = require('../utils/filesendtocloudinary')
@@ -9,7 +9,7 @@ const { filesendtocloudinary } = require('../utils/filesendtocloudinary')
 // get all orders
 exports.getAllOrders = async (req, res) => {
     try {
-        const orders = await Order.find().populate('products').sort({ createdAt: -1 });
+        const orders = await Order.find({}).sort({ createdAt: -1 }).populate('products');
         return res.status(200).json({
             success: true,
             orders
@@ -31,9 +31,9 @@ exports.DeleteProduct = async (req, res) => {
         // Find the Product
         const delProduct = await Product.findById(ProductId)
         if (!delProduct) {
-            return res.status(404).json({ 
-                success:false,
-                message: "Product not found" 
+            return res.status(404).json({
+                success: false,
+                message: "Product not found"
             })
         }
         // Delete the Product
