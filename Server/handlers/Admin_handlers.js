@@ -9,7 +9,7 @@ const { filesendtocloudinary } = require('../utils/filesendtocloudinary')
 // get all orders
 exports.getAllOrders = async (req, res) => {
     try {
-        const orders = await Order.find().populate('products');
+        const orders = await Order.find().populate('products').sort({ createdAt: -1 });
         return res.status(200).json({
             success: true,
             orders

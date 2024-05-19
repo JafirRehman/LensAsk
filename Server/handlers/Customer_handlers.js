@@ -7,7 +7,7 @@ const validator = require('validator');
 
 exports.getUserOrders = async (req, res) => {
     try {
-        const orders = await Order.find({ userid: req.user.id }).populate('products');
+        const orders = await Order.find({ userid: req.user.id }).populate('products').sort({ createdAt: -1 });
         return res.status(200).json({
             success: true,
             orders
