@@ -18,7 +18,7 @@ exports.mailsender = async (email, newProduct) => {
             from: 'AskLens',
             to: `${email}`,
             subject: 'New product available',
-            html: `<p>A new product is available: <a href="http://localhost:5173/products/${newProduct._id}">${newProduct.title}</a></p>`
+            html: `<p>A new product is available: <a href="http://localhost:5173/products">${newProduct.title}</a></p>`
         })
         return mail
     } catch (error) {

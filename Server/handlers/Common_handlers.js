@@ -1,8 +1,7 @@
-const Subscriber = require('./models/Subscriber');
+const Subscriber = require('../models/Subscriber');
 const Product = require('../models/Product')
-
 //subscribe
-exports.subscribe = async (req, res) => {
+exports.Subscriberroute = async (req, res) => {
     const { email }=req.body;
     try {
 
