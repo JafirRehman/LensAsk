@@ -1,24 +1,35 @@
 import React from 'react'
-
+import { differenceInHours, parseISO } from 'date-fns';
 const Ordercomponent = ({ order }) => {
     return (
-        <div className="flex flex-col items-center justify-center bg-white dark:bg-zinc-800 text-zinc-800 dark:text-white p-4 rounded-lg shadow-md space-y-4">
-            <h2 className="text-2xl font-bold mt-4">{order.receiverName}</h2>
-            <p className="text-lg mt-2">Phone Number: {order.phoneNumber}</p>
-            <p className="text-lg mt-2">Email: {order.email}</p>
-            <p className="text-lg mt-2">Order Number: {order._id}</p>
-            <p className="text-lg mt-2">Address: {order.address}</p>
-            <p className="text-lg mt-2">Total Price: {order.totalPrice}</p>
-            {order.products.map((product) => (
-                <div key={product._id} className="flex justify-center mt-4 space-x-4">
-                    <img src={product.image} alt="Product Image" className="w-24 h-24 object-cover rounded-lg mb-2" style={{ objectFit: 'cover' }} />
-                    <div className="flex flex-col items-start ml-4 space-y-2">
-                        <p className="text-lg">Product Name: {product.title}</p>
-                        <p className="text-lg">product ID: {product._id}</p>
-                        <p className="text-lg">Price: {product.price}</p>
+        <div className="bg-[#F2F1F3] max-w-[90%] mx-auto mobile:p-10 mt-10 mb-10 bg-white dark:bg-zinc-800 p-4" >
+            <div className="flex relative items-center justify-between mb-4">
+                {
+                    differenceInHours(new Date(), parseISO(order.createdAt)) <= 24 &&
+                    <div className=" absolute rounded-full -top-6 -left-8 bg-[#0E0E11] text-ourred-50 animate-bounce px-2 py-2 z-10 text-xs font-bold uppercase">New</div>
+                }
+                <h2 className="text-lg"><span className='text-[1.4rem] font-bold'>Order ID:</span> #{order._id}</h2>
+                <span className="text-zinc-500 dark:text-zinc-400">Total Price: Rs. {order.totalPrice}</span>
+            </div>
+            {
+                order.products.map((product) => (
+                    <div className="flex items-center mb-4">
+                        <img src={product.image} alt="Product Image" className="w-12 h-12 rounded-lg mr-2" />
+                        <div>
+                            <h3 className="text-sm font-semibold">Product Name: {product.title}</h3>
+                            <p className="text-zinc-500 dark:text-zinc-400">Product ID: {product._id}</p>
+                            <p className="text-zinc-500 dark:text-zinc-400">Price: Rs. {product.price}</p>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))
+            }
+            <div className="mt-4">
+                <h3 className="text-[1.3rem] font-bold">Receiver Details</h3>
+                <p className="text-zinc-500 dark:text-zinc-400 capitalize">Receiver Name: {order.receiverName}</p>
+                <p className="text-zinc-500 dark:text-zinc-400">Phone Number: {order.phoneNumber}</p>
+                <p className="text-zinc-500 dark:text-zinc-400">Email: {order.email}</p>
+                <p className="text-zinc-500 dark:text-zinc-400">Address: {order.address}</p>
+            </div>
         </div>
     )
 }

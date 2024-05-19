@@ -47,8 +47,8 @@ const CusOrderspage = () => {
         <>
             {isloading && <Spinner />}
             {isloading === false && orders.length === 0 && (
-                <div className="h-screen flex items-center justify-center bg-zinc-100 dark:bg-zinc-900">
-                    <p className="text-2xl text-center">There are no orders</p>
+                <div className="h-screen flex mt-28 justify-center bg-zinc-100 dark:bg-zinc-900">
+                    <p className="bg-[#F1F2F3] self-start p-5 text-2xl text-center">There Are No Orders!</p>
                 </div>
             )}
             {success && isloading === false && orders.length > 0 && (
