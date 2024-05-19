@@ -60,7 +60,7 @@ const Product = ({ post }) => {
                 </div>
             </div>
             <div className='text-[1rem]'>
-                <p className="font-bold  text-left truncate w-40 mt-1">
+                <p className="font-bold  text-left truncate mt-1">
                     {post.title}
                 </p>
                 <p className="text-green-600 font-semibold">Rs. {post.price}</p>
