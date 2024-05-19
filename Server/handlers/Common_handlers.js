@@ -5,7 +5,7 @@ exports.Subscriberroute = async (req, res) => {
     const { email }=req.body;
     try {
 
-        const findsubcriber = await Subscriber.findOne({ email })
+        const findsubcriber = await Subscriber.findOne( email )
         if (findsubcriber) {
             return res.status(400).json({
                 success: false,
@@ -20,6 +20,7 @@ exports.Subscriberroute = async (req, res) => {
             message: 'Subscribed Successfully',
         });
     } catch (error) {
+        console.log(error)
         return res.status(500).json({
             success: false,
             message: 'Server error'
