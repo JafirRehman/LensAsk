@@ -17,7 +17,7 @@ exports.login = async (req, res) => {
             })
         }
         //check user already exist
-        const existeduser = await User.findOne({ email }).populate("cart");
+        const existeduser = await User.findOne({ email }).populate("cart.product");
         if (!existeduser) {
             return res.status(401).json({
                 success: false,

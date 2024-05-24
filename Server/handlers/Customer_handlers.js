@@ -7,7 +7,7 @@ const validator = require('validator');
 
 exports.getUserOrders = async (req, res) => {
     try {
-        const orders = await Order.find({ userid: req.user.id }).sort({ createdAt: -1 }).populate('products');
+        const orders = await Order.find({ userid: req.user.id }).sort({ createdAt: -1 }).populate('products.product');
         return res.status(200).json({
             success: true,
             orders
@@ -24,17 +24,18 @@ exports.getUserOrders = async (req, res) => {
 //create order
 exports.createOrder = async (req, res) => {
 
-    const { receiverName, email, address, totalPrice, phoneNumber, products } = req.body;
+    const { receiverName, email, address, phoneNumber } = req.body;
     const { id } = req.user;
     try {
+        const user = await User.findById(id).populate("cart.product")
+        const totalPrice=user.cart.reduce((previous, item) => previous + (parseInt(item.product.price) * item.quantity), 0)
         //validate data
-        if (!id || !receiverName || !email || !address || !totalPrice || !phoneNumber || !products) {
+        if (!receiverName || !email || !address || !phoneNumber) {
             return res.status(400).json({
                 success: false,
                 message: 'Please fill all fields'
             });
         }
-
         //validate number
         if (!validator.isMobilePhone(phoneNumber)) {
             return res.status(400).json({
@@ -48,9 +49,9 @@ exports.createOrder = async (req, res) => {
             receiverName,
             email,
             address,
-            totalPrice,
             phoneNumber,
-            products,
+            totalPrice,
+            products:user.cart,
         })
         //send order confirmation mail to user
         try {
@@ -83,13 +84,14 @@ exports.createOrder = async (req, res) => {
             id,
             { $set: { cart: [] } },
             { new: true }
-        ).populate('cart');
+        ).populate('cart.product');
 
         //return response
         return res.status(201).json({
             success: true,
             message: 'Order created successfully',
-            existeduser
+            existeduser,
+            order: ourneworder
         });
     } catch (error) {
         console.error(error);
@@ -113,13 +115,18 @@ exports.addToCart = async (req, res) => {
                 message: 'User not found'
             });
         }
+        const productInCart = user.cart.find(item => item.product.toString() === productId);
         //push product in cart
-        user.cart.push(productId);
-
+        if (productInCart) {
+            productInCart.quantity += 1;
+        } else {
+            user.cart.push({ product: productId, quantity: 1 });
+        }
         await user.save();
 
-        const updatedUser = await User.findById(id).populate('cart');
+        const updatedUser = await User.findById(id).populate('cart.product');
         updatedUser.password = undefined;
+
         return res.status(200).json({
             success: true,
             message: 'Product added to cart successfully',
@@ -144,8 +151,8 @@ exports.removeFromCart = async (req, res) => {
 
     try {
         const user = await User.findByIdAndUpdate(id, {
-            $pull: { cart: trimproid }
-        }, { new: true }).populate('cart');
+            $pull: { cart: { product: trimproid } }
+        }, { new: true }).populate('cart.product');
 
         if (!user) {
             return res.status(404).json({
@@ -168,13 +175,57 @@ exports.removeFromCart = async (req, res) => {
         });
     }
 };
+// reduce quantity
+exports.reduceQuantity = async (req, res) => {
+    const { productId } = req.body;
+    const { id } = req.user;
+
+    try {
+        // Find the user and the product in the cart
+        const user = await User.findOne({ _id: id });
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found'
+            });
+        }
+
+        // Find the cart item
+        const item = user.cart.find(item => item.product.toString() === productId);
+
+        if (item.quantity > 1) {
+            item.quantity -= 1;
+            await user.save();
+        } else {
+            user.cart.pull({ product: productId });
+            await user.save();
+        }
+
+        //get updated User
+        const updatedUser = await User.findById(id).populate('cart.product');
+
+        return res.status(200).json({
+            success: true,
+            message: 'Product quantity reduced successfully',
+            existeduser: updatedUser
+        });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            success: false,
+            message: 'Something went wrong inside reduceQuantity try block'
+        });
+    }
+};
 
 //get cart of user
 exports.getCart = async (req, res) => {
     const { id } = req.user;
 
     try {
-        const user = await User.findById(id).populate('cart');
+        const user = await User.findById(id).populate('cart.product');
         if (!user) {
             return res.status(404).json({
                 success: false,

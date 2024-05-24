@@ -9,7 +9,7 @@ const Subscriber = require('../models/Subscriber')
 // get all orders
 exports.getAllOrders = async (req, res) => {
     try {
-        const orders = await Order.find({}).sort({ createdAt: -1 }).populate('products');
+        const orders = await Order.find({}).sort({ createdAt: -1 }).populate('products.product');
         return res.status(200).json({
             success: true,
             orders

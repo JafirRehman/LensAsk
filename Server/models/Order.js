@@ -10,9 +10,9 @@ const OrderSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    email:{
-        type:String,
-        required:true
+    email: {
+        type: String,
+        required: true
     },
     address: {
         type: String,
@@ -26,10 +26,19 @@ const OrderSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    products: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product'
-    }],
+    products: [
+        {
+            product: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Product',
+            },
+            quantity: {
+                type: Number,
+                required: true,
+                min: 1
+            }
+        },
+    ],
     createdAt: {
         type: Date,
         default: Date.now,
