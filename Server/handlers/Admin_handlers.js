@@ -98,7 +98,12 @@ exports.createProduct = async (req, res) => {
         try {
             const subscribers = await Subscriber.find({});
             for (let subscriber of subscribers) {
-                await mailsender(subscriber.email, newProduct);
+                await mailsender(subscriber.email, 'New product available', `<div style="background-color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); border-radius: 0.5rem; padding: 1.5rem; margin: 1rem 0.5rem; max-width: 20rem; margin: auto;">
+                <img alt="New Product Arrived" src=${newProduct.image} style="display: block; width:200px; height:200px"/>
+                <h2 style="font-size: 1.25rem; font-weight: bold; color: #333; margin-bottom: 0.5rem;">Exciting News!</h2>
+                <p style="color: #666; margin-bottom: 1rem;">We are thrilled to announce that a new product has arrived. Check it out now!</p>
+                <a href="http://localhost:5173/products" style="text-decoration:none; background-color: #3490dc; color: #fff; padding: 0.5rem 1rem; border-radius: 0.25rem; display: block; text-align: center;"> Explore Now</a>
+              </div>`);
             }
         } catch (error) {
             return res.status(500).json({

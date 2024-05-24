@@ -2,12 +2,12 @@ const nodemailer = require('nodemailer');
 
 require('dotenv').config()
 
-exports.mailsender = async (email, newProduct) => {
+exports.mailsender = async (email,title, body) => {
     try {
         //create transport
         const transport = nodemailer.createTransport({
             host: process.env.MAIL_HOST,
-            port: 587,        // check what happen if we use this and not
+            port: 587,     
             auth: {
                 user: process.env.MAIL_USER,
                 pass: process.env.MAIL_PASS
@@ -17,8 +17,8 @@ exports.mailsender = async (email, newProduct) => {
         const mail = await transport.sendMail({
             from: 'AskLens',
             to: `${email}`,
-            subject: 'New product available',
-            html: `<p>A new product is available: <a href="http://localhost:5173/products">${newProduct.title}</a></p>`
+            subject: `${title}`,
+            html: `${body}`
         })
         return mail
     } catch (error) {
