@@ -65,6 +65,29 @@ export const removefromcartThunk = createAsyncThunk('user/removefromcart', async
     return rejectWithValue('Something went wrong');
   }
 });
+
+//reduceQuantityThunk
+export const reduceQuantityThunk = createAsyncThunk('user/reduceQuantity', async (productId, { rejectWithValue }) => {
+  try {
+    const response = await fetch('http://localhost:5000/customer/reducequantity', {
+      method: "POST",
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ productId }),
+    });
+    const data = await response.json();
+    if (response.ok) {
+      return data;
+    } else {
+      return rejectWithValue(data.message);
+    }
+  } catch (error) {
+    return rejectWithValue('Something went wrong');
+  }
+});
+
 // User slice
 const userSlice = createSlice({
   name: 'user',
@@ -134,6 +157,21 @@ const userSlice = createSlice({
         toast.success(action.payload.message);
       })
       .addCase(removefromcartThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.removemessage = action.payload;
+        toast.error(action.payload);
+      })
+      .addCase(reduceQuantityThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(reduceQuantityThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.removesuccess = action.payload.success;
+        state.user = action.payload.existeduser;
+        state.removemessage = action.payload.message;
+        toast.success(action.payload.message);
+      })
+      .addCase(reduceQuantityThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.removemessage = action.payload;
         toast.error(action.payload);

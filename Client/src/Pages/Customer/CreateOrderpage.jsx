@@ -12,15 +12,12 @@ const CreateOrderpage = () => {
     const [isloading, setIsloading] = useState(false)
 
     let userState = useSelector(state => state.user)
-    const user = userState?.user;
 
     const [formdata, setFormdata] = useState({
         receiverName: '',
         email: '',
         address: '',
-        totalPrice: user?.cart?.reduce((previous, item) => previous + parseInt(item.price), 0),
         phoneNumber: '',
-        products: user?.cart?.map(item => item._id),
     })
     const navigate = useNavigate();
     const dispatch = useDispatch();

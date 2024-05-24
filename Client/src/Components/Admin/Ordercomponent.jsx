@@ -12,13 +12,14 @@ const Ordercomponent = ({ order }) => {
                 <span className="text-zinc-500 dark:text-zinc-400">Total Price: Rs. {order.totalPrice}</span>
             </div>
             {
-                order.products.map((product) => (
+                order.products.map((pro) => (
                     <div className="flex items-center mb-4">
-                        <img src={product.image} alt="Product Image" className="w-12 h-12 rounded-lg mr-2" />
+                        <img src={pro.product.image} alt="Product Image" className="w-12 h-12 rounded-lg mr-2" />
                         <div>
-                            <h3 className="text-sm font-semibold">Product Name: {product.title}</h3>
-                            <p className="text-zinc-500 dark:text-zinc-400">Product ID: {product._id}</p>
-                            <p className="text-zinc-500 dark:text-zinc-400">Price: Rs. {product.price}</p>
+                            <h3 className="text-sm font-semibold">Product Name: {pro.product.title}</h3>
+                            <p className="text-zinc-500 dark:text-zinc-400">Product ID: {pro.product._id}</p>
+                            <p className="text-zinc-500 dark:text-zinc-400">Price: Rs. {pro.product.price}</p>
+                            <p className="text-zinc-500 dark:text-zinc-400">Quantity: {pro.quantity}</p>
                         </div>
                     </div>
                 ))
@@ -29,6 +30,7 @@ const Ordercomponent = ({ order }) => {
                 <p className="text-zinc-500 dark:text-zinc-400">Phone Number: {order.phoneNumber}</p>
                 <p className="text-zinc-500 dark:text-zinc-400">Email: {order.email}</p>
                 <p className="text-zinc-500 dark:text-zinc-400">Address: {order.address}</p>
+
             </div>
         </div>
     )

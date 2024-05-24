@@ -9,7 +9,7 @@ const Cartpage = () => {
   const user = userState?.user;
 
   useEffect(() => {
-    setTotalAmount(user?.cart?.reduce((previous, item) => previous + parseInt(item.price), 0))
+    setTotalAmount(user?.cart?.reduce((previous, item) => previous + (parseInt(item.product.price) * item.quantity), 0))
   }, [userState])
 
   const navigate = useNavigate()
