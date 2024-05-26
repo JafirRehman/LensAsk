@@ -17,6 +17,7 @@ import Createproductpage from './Pages/Admin/Createproductpage.jsx';
 import ScrollToTop from './Constants/ScrollToTop.jsx';
 import Newsletter from './Constants/Newsletter.jsx';
 import ProductDetails from './Pages/ProductDetails.jsx';
+import Transectionfail from './Pages/Transectionfail.jsx';
 
 const App = () => {
   const userState = useSelector(state => state.user)
@@ -36,7 +37,8 @@ const App = () => {
         <Route exact path="/customer/cart" element={<Cartpage />} />
         <Route exact path="/user/profile" element={<Profilepage />} />
         <Route exact path="/user/allorders" element={<Orderspage />} />
-        <Route exact path="/user/cart/order" element={<CreateOrderpage />} />
+        <Route exact path="/user/cart/order/success" element={<CreateOrderpage />} />
+        <Route exact path="/user/cart/order/failure" element={<Transectionfail />} />
         <Route exact path="/user/createproduct" element={<Createproductpage />} />
 
       </Routes>

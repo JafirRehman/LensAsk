@@ -3,7 +3,11 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CartItem from "../Components/CartItem";
 import { useNavigate } from "react-router-dom";
+import { loadStripe } from '@stripe/stripe-js';
+import { toast } from 'react-hot-toast';
+import Spinner from "../Components/Spinner";
 const Cartpage = () => {
+  const [loading,setLoading]=useState(false)
   const [totalAmount, setTotalAmount] = useState(0);
   const userState = useSelector((state) => state.user);
   const user = userState?.user;
@@ -18,6 +22,32 @@ const Cartpage = () => {
       navigate('/login')
     }
   })
+
+  async function makepayment() {
+
+    setLoading(true)
+    const stripe = await loadStripe("pk_test_51PKkDASBSYlvW4A9uaNq5i9QnBeJsdVC4XZnBZooG2uVUP19buHVpimgjTbDA2VLNsRBv2Anax8IhX9XjwQ7hpVn003bEam70J")
+
+    const response = await fetch("http://localhost:5000/customer/cartsession", {
+      method: "POST",
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ messege: "cart session" })
+    });
+    if (response.ok) {
+      const session = await response.json();
+      const result = stripe.redirectToCheckout({
+        sessionId: session.id
+      });
+    }else{
+      console.log(response)
+      toast.error("something went wrong")
+    }
+    setLoading(false)
+  }
+
   return (
     <div>
       {
@@ -41,8 +71,10 @@ const Cartpage = () => {
                 <p className="mt-5 text-slate-700 text-xl font-[600] mb-5 ">Total Amount:
                   <span className="font-bold ml-2 text-[#16a34a]">Rs. <span className="text-[#0E0E11]">{totalAmount}</span></span>
                 </p>
-                <button onClick={() => navigate('/user/cart/order')} className="bg-[#0E0E11] text-ourred-50 text-md uppercase font-[600px] py-3 px-10 rounded-md hover:scale-90 transition-all duration-300">
-                  CheckOut Now
+                <button onClick={makepayment} className="bg-[#0E0E11] text-ourred-50 text-md uppercase font-[600px] py-3 px-10 rounded-md hover:scale-90 transition-all duration-300">
+                  {
+                    loading ? <Spinner status={true}/> : "CheckOut Now"
+                  }
                 </button>
               </div>
             </div>
