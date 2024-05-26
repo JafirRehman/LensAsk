@@ -1,11 +1,13 @@
 const Subscriber = require('../models/Subscriber');
 const Product = require('../models/Product')
+
+
 //subscribe
 exports.Subscriberroute = async (req, res) => {
-    const { email }=req.body;
+    const { email } = req.body;
     try {
 
-        const findsubcriber = await Subscriber.findOne( email )
+        const findsubcriber = await Subscriber.findOne(email)
         if (findsubcriber) {
             return res.status(400).json({
                 success: false,

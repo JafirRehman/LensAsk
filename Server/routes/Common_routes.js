@@ -8,4 +8,5 @@ const router = express.Router()
 router.get("/getallproducts", GetAllProducts)
 router.post("/subscribe", Subscriberroute)
 
+
 module.exports = router

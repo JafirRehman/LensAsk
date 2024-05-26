@@ -11,6 +11,8 @@ const Admin_routes = require("./routes/Admin_routes");
 const Common_routes= require('./routes/Common_routes')
 const Auth_routes= require('./routes/Auth_routes')
 const Customer_routes= require('./routes/Customer_routes')
+const AuthCommon_routes= require('./routes/AuthCommon_routes')
+
 
 require('dotenv').config();
 
@@ -43,6 +45,7 @@ const { auth, isCustomer, isAdmin } = require("./middlewares/Auth_middlewares")
 app.use("/admin", auth , isAdmin, Admin_routes );
 app.use("/common", Common_routes );
 app.use("/Auth", Auth_routes );
+app.use("/AuthCommon",auth, AuthCommon_routes);
 app.use("/customer", auth , isCustomer ,Customer_routes);
 
 
