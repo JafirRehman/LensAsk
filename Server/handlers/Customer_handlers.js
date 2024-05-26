@@ -3,8 +3,55 @@ const Order = require('../models/Order');
 const { mailsender } = require('../utils/mailsender');
 const validator = require('validator');
 
-//get orders of user
+const stripe = require("stripe")("sk_test_51PKkDASBSYlvW4A9XhUFrmzav3bxXZi4IfsQ14jKZzyhLtfCnmQojh4MeWIJNLW1pFq20MEeqJsK3wExfHzUVecp00Yg8GP36q");
 
+exports.cartsession = async (req, res) => {
+    const { id } = req.user;
+    try {
+        //get user cart
+        const user = await User.findById(id).populate('cart.product');
+        //validate
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found'
+            });
+        }
+        const usercart = user.cart.map(item => {
+            return {
+                price_data: {
+                    currency: "pkr",
+                    product_data: {
+                        name: item.product.title,
+                        images: [item.product.image],
+                    },
+                    unit_amount: item.product.price * 100,
+                },
+                quantity: item.quantity,
+            }
+        });
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ["card"],
+            line_items: usercart,
+            mode: "payment",
+            success_url: "http://localhost:5173/user/cart/order/success",
+            cancel_url: "http://localhost:5173/user/cart/order/failure",
+        });
+        //return session id
+        return res.status(200).json({
+            success: true,
+            id: session.id
+        })
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: 'Server error'
+        });
+    }
+};
+
+//get orders of user
 exports.getUserOrders = async (req, res) => {
     try {
         const orders = await Order.find({ userid: req.user.id }).sort({ createdAt: -1 }).populate('products.product');
@@ -28,7 +75,7 @@ exports.createOrder = async (req, res) => {
     const { id } = req.user;
     try {
         const user = await User.findById(id).populate("cart.product")
-        const totalPrice=user.cart.reduce((previous, item) => previous + (parseInt(item.product.price) * item.quantity), 0)
+        const totalPrice = user.cart.reduce((previous, item) => previous + (parseInt(item.product.price) * item.quantity), 0)
         //validate data
         if (!receiverName || !email || !address || !phoneNumber) {
             return res.status(400).json({
@@ -51,7 +98,7 @@ exports.createOrder = async (req, res) => {
             address,
             phoneNumber,
             totalPrice,
-            products:user.cart,
+            products: user.cart,
         })
         //send order confirmation mail to user
         try {
