@@ -5,9 +5,7 @@ const validator = require("validator");
 
 require("dotenv").config();
 
-const stripe = require("stripe")(
-  "sk_test_51PKkDASBSYlvW4A9XhUFrmzav3bxXZi4IfsQ14jKZzyhLtfCnmQojh4MeWIJNLW1pFq20MEeqJsK3wExfHzUVecp00Yg8GP36q"
-);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.cartsession = async (req, res) => {
   const { id } = req.user;
@@ -40,8 +38,8 @@ exports.cartsession = async (req, res) => {
       line_items: usercart,
       billing_address_collection: "auto",
       mode: "payment",
-      success_url: `${process.env.FRONTEND_BASE_URL}/user/cart/order/success`,
-      cancel_url: `${process.env.FRONTEND_BASE_URL}/user/cart/order/failure`,
+      success_url: `${process.env.FRONTEND_BASE_URL}/success`,
+      cancel_url: `${process.env.FRONTEND_BASE_URL}/cancel`,
     });
     //return session id
     return res.status(200).json({

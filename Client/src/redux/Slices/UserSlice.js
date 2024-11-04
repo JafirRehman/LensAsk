@@ -1,27 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { isSessionExpired } from "./sessionUtils";
+const initialState = {
+  user: localStorage.getItem("userInfo")
+    ? JSON.parse(localStorage.getItem("userInfo"))
+    : false,
+};
 
-// User slice
 const userSlice = createSlice({
   name: "user",
-  initialState: {
-    user: false,
-  },
+  initialState,
   reducers: {
     updateuser: (state, action) => {
       state.user = action.payload;
+      localStorage.setItem("userInfo", JSON.stringify(action.payload));
+      // set expiration time for 1 day
+      const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000; // 24 hours
+      localStorage.setItem("expirationTime", expirationTime);
     },
     userlogoutReducer: (state) => {
       state.user = false;
+      localStorage.removeItem("userInfo");
+      localStorage.removeItem("expirationTime");
     },
   },
 });
-export const {
-  userlogoutReducer,
-  updateuser,
-  loginUser,
-  reduceQuantity,
-  removefromcart,
-  addtocart,
-} = userSlice.actions;
+
+if (isSessionExpired()) {
+  userSlice.caseReducers.userlogoutReducer(initialState);
+}
+
+export const { userlogoutReducer, updateuser } = userSlice.actions;
 
 export default userSlice.reducer;

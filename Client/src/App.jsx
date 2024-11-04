@@ -11,12 +11,13 @@ import Profilepage from "./Pages/Profilepage.jsx";
 import { useSelector } from "react-redux";
 import Adminheader from "./Components/Admin/Adminheader.jsx";
 import Orderspage from "./Pages/Admin/Orderspage.jsx";
-import CreateOrderpage from "./Pages/Customer/CreateOrderpage.jsx";
+// import CreateOrderpage from "./Pages/Customer/CreateOrderpage.jsx";
 import Createproductpage from "./Pages/Admin/Createproductpage.jsx";
 import ScrollToTop from "./Constants/ScrollToTop.jsx";
 import Newsletter from "./Constants/Newsletter.jsx";
 import ProductDetails from "./Pages/ProductDetails.jsx";
 import Transectionfail from "./Pages/Transectionfail.jsx";
+import Transectionsuccess from "./Pages/Transectionsuccess.jsx";
 
 const App = () => {
   const userState = useSelector((state) => state.user);
@@ -42,16 +43,9 @@ const App = () => {
         <Route exact path="/customer/cart" element={<Cartpage />} />
         <Route exact path="/user/profile" element={<Profilepage />} />
         <Route exact path="/user/allorders" element={<Orderspage />} />
-        <Route
-          exact
-          path="/user/cart/order/success"
-          element={<CreateOrderpage />}
-        />
-        <Route
-          exact
-          path="/user/cart/order/failure"
-          element={<Transectionfail />}
-        />
+        {/** <Route exact path="" element={<CreateOrderpage />} /> */}
+        <Route exact path="/success" element={<Transectionsuccess />} />
+        <Route exact path="/cancel" element={<Transectionfail />} />
         <Route
           exact
           path="/user/createproduct"
