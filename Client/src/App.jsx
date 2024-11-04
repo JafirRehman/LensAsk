@@ -18,6 +18,8 @@ import Newsletter from "./Constants/Newsletter.jsx";
 import ProductDetails from "./Pages/ProductDetails.jsx";
 import Transectionfail from "./Pages/Transectionfail.jsx";
 import Transectionsuccess from "./Pages/Transectionsuccess.jsx";
+import ProtectedRoutes from "./middlewares/ProtectedRoutes.jsx";
+import AdminRoutes from "./middlewares/AdminRoutes.jsx";
 
 const App = () => {
   const userState = useSelector((state) => state.user);
@@ -43,16 +45,20 @@ const App = () => {
         {/** cant be accessed when user is loged in */}
         <Route exact path="/login" element={<Loginpage />} />
         <Route exact path="/signup" element={<Signuppage />} />
-        {/** cant be accessed if user is not loged in. user can be admin or not admin*/}
-        <Route exact path="/user/profile" element={<Profilepage />} />
-        <Route exact path="/customer/cart" element={<Cartpage />} />
+        {/** user should be loged in to access these routes */}
+        <Route path="" element={<ProtectedRoutes />}>
+          <Route exact path="/user/profile" element={<Profilepage />} />
+          <Route exact path="/customer/cart" element={<Cartpage />} />
+        </Route>
         {/** user should be admin to access these routes */}
-        <Route exact path="/user/allorders" element={<Orderspage />} />
-        <Route
-          exact
-          path="/user/createproduct"
-          element={<Createproductpage />}
-        />
+        <Route path="" element={<AdminRoutes />}>
+          <Route exact path="/user/allorders" element={<Orderspage />} />
+          <Route
+            exact
+            path="/user/createproduct"
+            element={<Createproductpage />}
+          />
+        </Route>
       </Routes>
       <Newsletter />
       <Footer />

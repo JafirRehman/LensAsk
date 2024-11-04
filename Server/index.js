@@ -43,8 +43,8 @@ const { auth, isCustomer, isAdmin } = require("./middlewares/Auth_middlewares");
 
 app.use("/admin", auth, isAdmin, Admin_routes);
 app.use("/common", Common_routes);
-app.use("/Auth", Auth_routes);
-app.use("/AuthCommon", auth, AuthCommon_routes);
+app.use("/auth", Auth_routes);
+app.use("/authCommon", auth, AuthCommon_routes);
 app.use("/customer", auth, isCustomer, Customer_routes);
 
 // Setting up port number
