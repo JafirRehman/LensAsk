@@ -38,14 +38,16 @@ const App = () => {
           path="/productsdetails/:productid"
           element={<ProductDetails />}
         />
-        <Route exact path="/login" element={<Loginpage />} />
-        <Route exact path="/signup" element={<Signuppage />} />
-        <Route exact path="/customer/cart" element={<Cartpage />} />
-        <Route exact path="/user/profile" element={<Profilepage />} />
-        <Route exact path="/user/allorders" element={<Orderspage />} />
-        {/** <Route exact path="" element={<CreateOrderpage />} /> */}
         <Route exact path="/success" element={<Transectionsuccess />} />
         <Route exact path="/cancel" element={<Transectionfail />} />
+        {/** cant be accessed when user is loged in */}
+        <Route exact path="/login" element={<Loginpage />} />
+        <Route exact path="/signup" element={<Signuppage />} />
+        {/** cant be accessed if user is not loged in. user can be admin or not admin*/}
+        <Route exact path="/user/profile" element={<Profilepage />} />
+        <Route exact path="/customer/cart" element={<Cartpage />} />
+        {/** user should be admin to access these routes */}
+        <Route exact path="/user/allorders" element={<Orderspage />} />
         <Route
           exact
           path="/user/createproduct"
