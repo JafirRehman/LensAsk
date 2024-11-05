@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Spinner from "../Components/Spinner";
+import Spinner from "../../Components/Constants/Spinner";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
-import { updateuser } from "../redux/Slices/UserSlice";
+import { updateuser } from "../../redux/Slices/UserSlice";
 
 const ProductDetails = () => {
   const [isLoading, setIsLoading] = useState(false);

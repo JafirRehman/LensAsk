@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import Spinner from "../../Components/Spinner";
+import Spinner from "../../Components/Constants/Spinner";
 import { updateuser } from "../../redux/Slices/UserSlice";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+
 const CreateOrderpage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();

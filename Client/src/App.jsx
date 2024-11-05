@@ -1,26 +1,27 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./Pages/Home.jsx";
-import Header from "./Constants/Header.jsx";
-import Footer from "./Constants/Footer.jsx";
-import Products from "./Pages/Products.jsx";
-import { Toaster } from "react-hot-toast";
-import Loginpage from "./Pages/Loginpage.jsx";
-import Signuppage from "./Pages/Signuppage.jsx";
-import Cartpage from "./Pages/Cartpage.jsx";
-import Profilepage from "./Pages/Profilepage.jsx";
 import { useSelector } from "react-redux";
-import Adminheader from "./Components/Admin/Adminheader.jsx";
+import { Toaster } from "react-hot-toast";
+import Home from "./Pages/Home.jsx";
+import Products from "./Pages/Products/Products.jsx";
+import Loginpage from "./Pages/Auth/Loginpage.jsx";
+import Signuppage from "./Pages/Auth/Signuppage.jsx";
+import Cartpage from "./Pages/Customer/Cartpage.jsx";
+import Profilepage from "./Pages/User/Profilepage.jsx";
 import Orderspage from "./Pages/Admin/Orderspage.jsx";
-// import CreateOrderpage from "./Pages/Customer/CreateOrderpage.jsx";
 import Createproductpage from "./Pages/Admin/Createproductpage.jsx";
-import ScrollToTop from "./Constants/ScrollToTop.jsx";
-import Newsletter from "./Constants/Newsletter.jsx";
-import ProductDetails from "./Pages/ProductDetails.jsx";
-import Transectionfail from "./Pages/Transectionfail.jsx";
-import Transectionsuccess from "./Pages/Transectionsuccess.jsx";
+import ProductDetails from "./Pages/Products/ProductDetails.jsx";
+import Transectionfail from "./Pages/Stripe/Transectionfail.jsx";
+import Transectionsuccess from "./Pages/Stripe/Transectionsuccess.jsx";
+// import CreateOrderpage from "./Pages/Customer/CreateOrderpage.jsx";
 import ProtectedRoutes from "./middlewares/ProtectedRoutes.jsx";
 import AdminRoutes from "./middlewares/AdminRoutes.jsx";
 import ProtectedAuthRoutes from "./middlewares/ProtectedAuthRoutes.jsx";
+import Adminheader from "./Components/Admin/Adminheader.jsx";
+import Header from "./Components/Constants/Header.jsx";
+import Footer from "./Components/Constants/Footer.jsx";
+import ScrollToTop from "./Components/Constants/ScrollToTop.jsx";
+import Newsletter from "./Components/Constants/Newsletter.jsx";
+
 const App = () => {
   const userState = useSelector((state) => state.user);
   return (

@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import { MdDeleteSweep } from "react-icons/md";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import Spinner from "./Spinner";
+import Spinner from "../Constants/Spinner";
 import { useState } from "react";
-import { updateuser } from "../redux/Slices/UserSlice";
+import { updateuser } from "../../redux/Slices/UserSlice";
 
 const CartItem = ({ item }) => {
   const [removeloading, setRemoveloading] = useState(false);

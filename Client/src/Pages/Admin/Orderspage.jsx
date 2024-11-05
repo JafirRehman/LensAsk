@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import Spinner from "../../Components/Spinner";
-import Ordercomponent from "../../Components/Admin/Ordercomponent";
+import Spinner from "../../Components/Constants/Spinner";
+import Ordercomponent from "../../Components/Constants/Ordercomponent";
 
 const Orderspage = () => {
   const [isloading, setIsloading] = useState(false);

@@ -1,9 +1,9 @@
 import { FaCartShopping } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import Logoimg from "../assets/logo.png";
-import "../styles/Header.scss";
+import Logoimg from "../../assets/logo.png";
+import "../../styles/Header.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { userlogoutReducer } from "../redux/Slices/UserSlice";
+import { userlogoutReducer } from "../../redux/Slices/UserSlice";
 import toast from "react-hot-toast";
 
 const Header = () => {

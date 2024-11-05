@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { differenceInHours, parseISO } from "date-fns";
-import Spinner from "./Spinner";
+import Spinner from "../Constants/Spinner";
 import { useState } from "react";
-import { updateuser } from "../redux/Slices/UserSlice";
+import { updateuser } from "../../redux/Slices/UserSlice";
 
 const Product = ({ post }) => {
   const [isLoading, setIsLoading] = useState(false);

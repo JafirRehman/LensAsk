@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import "../styles/Banner.scss";
+import "../../styles/Banner.scss";
 
 const Banner = () => {
   const navigate = useNavigate();

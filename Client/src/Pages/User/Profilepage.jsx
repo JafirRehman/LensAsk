@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import Intro from "../Components/Profile/Intro";
-import Spinner from "../Components/Spinner";
+import { useSelector, useDispatch } from "react-redux";
+import Intro from "../../Components/User/Intro";
+import Spinner from "../../Components/Constants/Spinner";
 import toast from "react-hot-toast";
-import { updateuser } from "../redux/Slices/UserSlice";
+import { updateuser } from "../../redux/Slices/UserSlice";
 
 const Profilepage = () => {
   const [isLoading, setIsLoading] = useState(true);

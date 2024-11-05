@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { isSessionExpired } from "./sessionUtils";
+import { isUserExpired } from "./sessionUtils";
 const initialState = {
   user: localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo"))
@@ -25,7 +25,7 @@ const userSlice = createSlice({
   },
 });
 
-if (isSessionExpired()) {
+if (isUserExpired()) {
   userSlice.caseReducers.userlogoutReducer(initialState);
 }
 
