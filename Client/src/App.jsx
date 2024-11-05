@@ -20,7 +20,7 @@ import Transectionfail from "./Pages/Transectionfail.jsx";
 import Transectionsuccess from "./Pages/Transectionsuccess.jsx";
 import ProtectedRoutes from "./middlewares/ProtectedRoutes.jsx";
 import AdminRoutes from "./middlewares/AdminRoutes.jsx";
-
+import ProtectedAuthRoutes from "./middlewares/ProtectedAuthRoutes.jsx";
 const App = () => {
   const userState = useSelector((state) => state.user);
   return (
@@ -43,8 +43,10 @@ const App = () => {
         <Route exact path="/success" element={<Transectionsuccess />} />
         <Route exact path="/cancel" element={<Transectionfail />} />
         {/** cant be accessed when user is loged in */}
-        <Route exact path="/login" element={<Loginpage />} />
-        <Route exact path="/signup" element={<Signuppage />} />
+        <Route path="" element={<ProtectedAuthRoutes />}>
+          <Route exact path="/login" element={<Loginpage />} />
+          <Route exact path="/signup" element={<Signuppage />} />
+        </Route>
         {/** user should be loged in to access these routes */}
         <Route path="" element={<ProtectedRoutes />}>
           <Route exact path="/user/profile" element={<Profilepage />} />
