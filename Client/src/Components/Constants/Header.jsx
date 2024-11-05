@@ -45,6 +45,22 @@ const Header = () => {
             >
               All Products
             </li>
+            {userState.user && userState.user.role === "Admin" && (
+              <>
+                <li
+                  className="hover:border-b-2 hover:opacity-[0.6]"
+                  onClick={() => navigate("/user/allorders")}
+                >
+                  All Orders
+                </li>
+                <li
+                  className="hover:border-b-2 hover:opacity-[0.6]"
+                  onClick={() => navigate("/user/createproduct")}
+                >
+                  Create Product
+                </li>
+              </>
+            )}
           </ul>
           <div className="center" onClick={() => navigate("/")}>
             <img src={Logoimg} width={250} />
@@ -57,12 +73,14 @@ const Header = () => {
               >
                 Logout
               </button>
-              <button
-                className="hover:border-b-2 hover:opacity-[0.6]"
-                onClick={() => navigate("/customer/cart")}
-              >
-                <FaCartShopping className="text-ourred-50" />
-              </button>
+              {userState.user.role !== "Admin" && (
+                <button
+                  className="hover:border-b-2 hover:opacity-[0.6]"
+                  onClick={() => navigate("/customer/cart")}
+                >
+                  <FaCartShopping className="text-ourred-50" />
+                </button>
+              )}
               <button
                 onClick={() => navigate("/user/profile")}
                 className="flex items-center justify-between p-4 bg-zinc-200 dark:bg-zinc-800"

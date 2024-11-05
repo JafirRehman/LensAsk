@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import Home from "./Pages/Home.jsx";
 import Products from "./Pages/Products/Products.jsx";
@@ -16,23 +15,17 @@ import Transectionsuccess from "./Pages/Stripe/Transectionsuccess.jsx";
 import ProtectedRoutes from "./middlewares/ProtectedRoutes.jsx";
 import AdminRoutes from "./middlewares/AdminRoutes.jsx";
 import ProtectedAuthRoutes from "./middlewares/ProtectedAuthRoutes.jsx";
-import Adminheader from "./Components/Admin/Adminheader.jsx";
 import Header from "./Components/Constants/Header.jsx";
 import Footer from "./Components/Constants/Footer.jsx";
 import ScrollToTop from "./Components/Constants/ScrollToTop.jsx";
 import Newsletter from "./Components/Constants/Newsletter.jsx";
 
 const App = () => {
-  const userState = useSelector((state) => state.user);
   return (
     <BrowserRouter>
       <ScrollToTop />
       <Toaster />
-      {userState && userState.user?.role === "Admin" ? (
-        <Adminheader />
-      ) : (
-        <Header />
-      )}
+      <Header />
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/products" element={<Products />} />
