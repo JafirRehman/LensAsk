@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import Spinner from "../Spinner";
+import Spinner from "../Constants/Spinner";
 
 const Signupform = () => {
   const [isloading, setIsloading] = useState(false);

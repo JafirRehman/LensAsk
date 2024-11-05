@@ -3,7 +3,7 @@ import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import Spinner from "../Spinner";
+import Spinner from "../../Components/Constants/Spinner";
 import toast from "react-hot-toast";
 import { updateuser } from "../../redux/Slices/UserSlice";
 
