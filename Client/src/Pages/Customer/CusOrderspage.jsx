@@ -11,13 +11,16 @@ const CusOrderspage = () => {
     setIsloading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/customer/getuserorders", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BACKEND_BASE_URL}/customer/getuserorders`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (res.ok) {
         const data = await res.json();
         setOrders(data.orders);

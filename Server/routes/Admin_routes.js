@@ -1,11 +1,14 @@
-const express=require('express')
+const express = require("express");
 
-const {getAllOrders,createProduct,DeleteProduct}=require('../handlers/Admin_handlers')
+const {
+  getAllOrders,
+  createProduct,
+  DeleteProduct,
+} = require("../handlers/Admin_handlers");
 
-const router = express.Router()
+const router = express.Router();
 
-router.post("/createproduct", createProduct)
-router.delete("/deleteproduct", DeleteProduct)
-router.get("/getallorders",getAllOrders)    
+router.post("/createproduct", createProduct);
+router.get("/getallorders", getAllOrders);
 
-module.exports = router
+module.exports = router;

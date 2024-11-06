@@ -10,14 +10,17 @@ const Newsletter = () => {
   async function subscribe(email) {
     setIsloading(true);
     try {
-      const result = await fetch("http://localhost:5000/common/subscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ email }),
-      });
+      const result = await fetch(
+        `${import.meta.env.VITE_API_BACKEND_BASE_URL}/common/subscribe`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ email }),
+        }
+      );
       if (result.ok) {
         const data = await result.json();
         toast.success(data.message);

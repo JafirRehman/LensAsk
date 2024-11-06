@@ -122,27 +122,6 @@ exports.signup = async (req, res) => {
       image: `https://api.dicebear.com/6.x/initials/svg?seed=${name}&backgroundColor=00897b,00acc1,039be5,1e88e5,3949ab,43a047,5e35b1,7cb342,8e24aa,c0ca33,d81b60,e53935,f4511e,fb8c00,fdd835,ffb300,ffd5dc,ffdfbf,c0aede,d1d4f9,b6e3f4&backgroundType=solid,gradientLinear&backgroundRotation=0,360,-350,-340,-330,-320&fontFamily=Arial&fontWeight=600`,
       role: userrole,
     });
-    //send mail
-    try {
-      await mailsender(
-        ournewuser.email,
-        "Successful Signup",
-        `<div style="max-width: 32rem; margin: 0 auto; padding: 1.5rem; background-color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); border-radius: 0.5rem; color: #333333;">
-            <h1 style="font-size: 1.25rem; font-weight: 700; color: #333333;">Welcome to our platform!</h1>
-            <p style="color: #666666; margin-top: 0.5rem;">Dear ${ournewuser.name},</p>
-            <p style="color: #666666; margin-top: 0.5rem;">Thank you for signing up with us. Your account has been successfully created.</p>
-            <p style="color: #666666; margin-top: 0.5rem;">Feel free to explore our platform and let us know if you have any questions.</p>
-            <a href="http://localhost:5173/login" style="background-color: #3490dc; text-decoration:none; color: #ffffff; padding: 0.5rem 1rem; border-radius: 0.25rem; margin-top: 1rem; display: inline-block;">Get Started</a>
-            <p style="color: #666666; margin-top: 0.5rem;">Best regards,</p>
-            <p style="color: #666666;">LensAsk</p>
-            </div>`
-      );
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        message: "Cant Send Mail",
-      });
-    }
     //return response
     return res.status(200).json({
       success: true,

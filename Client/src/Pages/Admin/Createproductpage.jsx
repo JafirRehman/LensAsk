@@ -23,16 +23,20 @@ const Createproductpage = () => {
   async function createproduct(formdata) {
     setIsloading(true);
     try {
+      console.log(formdata);
       const formData = new FormData();
       Object.keys(formdata).forEach((key) => {
         formData.append(key, formdata[key]);
       });
 
-      let response = await fetch("http://localhost:5000/admin/createproduct", {
-        method: "POST",
-        credentials: "include",
-        body: formData,
-      });
+      let response = await fetch(
+        `${import.meta.env.VITE_API_BACKEND_BASE_URL}/admin/createproduct`,
+        {
+          method: "POST",
+          credentials: "include",
+          body: formData,
+        }
+      );
       if (response.ok) {
         const data = await response.json();
         toast.success(data.message);
@@ -83,7 +87,7 @@ const Createproductpage = () => {
             required
             id="price"
             className=" text-[1rem] h-[50px] p-5 focus:outline-none text-white"
-            type="text"
+            type="number"
             placeholder="Enter Price"
           ></input>
 

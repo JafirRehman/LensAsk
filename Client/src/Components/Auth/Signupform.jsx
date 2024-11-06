@@ -25,14 +25,17 @@ const Signupform = () => {
   async function createuser(newuserobj) {
     setIsloading(true);
     try {
-      let response = await fetch("http://localhost:5000/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(newuserobj),
-      });
+      let response = await fetch(
+        `${import.meta.env.VITE_API_BACKEND_BASE_URL}/auth/signup`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(newuserobj),
+        }
+      );
       return await response.json();
     } catch (error) {
       return { success: false, message: "something went wrong" };

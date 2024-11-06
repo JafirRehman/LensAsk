@@ -34,14 +34,17 @@ const Cartpage = () => {
       "pk_test_51PKkDASBSYlvW4A9uaNq5i9QnBeJsdVC4XZnBZooG2uVUP19buHVpimgjTbDA2VLNsRBv2Anax8IhX9XjwQ7hpVn003bEam70J"
     );
 
-    const response = await fetch("http://localhost:5000/customer/cartsession", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ messege: "cart session" }),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_BACKEND_BASE_URL}/customer/cartsession`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ messege: "cart session" }),
+      }
+    );
     if (response.ok) {
       const session = await response.json();
       // eslint-disable-next-line no-unused-vars
