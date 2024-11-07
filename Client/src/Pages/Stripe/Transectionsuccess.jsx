@@ -12,7 +12,7 @@ const PaymentSuccess = () => {
       </p>
 
       <Link
-        to="/"
+        to="/user/profile"
         className=" text-white font-medium px-6 py-2 rounded bg-ourred-400 hover:bg-ourred-600 hover:scale-95 duration-300 transition-all"
       >
         Take me to my Profile
