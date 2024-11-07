@@ -4,7 +4,7 @@ const {
   Subscriberroute,
   GetAllProducts,
   GetProductById,
-} = require("../handlers/Common_handlers");
+} = require("../Controllers/Public");
 
 const router = express.Router();
 

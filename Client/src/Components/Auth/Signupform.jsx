@@ -24,6 +24,11 @@ const Signupform = () => {
   }
   async function createuser(newuserobj) {
     setIsloading(true);
+    if (!navigator.onLine) {
+      toast.error("Oops, You are Offline!");
+      setIsloading(false);
+      return;
+    }
     try {
       let response = await fetch(
         `${import.meta.env.VITE_API_BACKEND_BASE_URL}/auth/signup`,
@@ -36,22 +41,22 @@ const Signupform = () => {
           body: JSON.stringify(newuserobj),
         }
       );
-      return await response.json();
+      const data = await response.json();
+      if (!data.success) {
+        throw new Error(data.message);
+      }
+      toast.success(data.message);
+      navigate("/login");
     } catch (error) {
-      return { success: false, message: "something went wrong" };
+      console.error(error.message);
+      toast.error(error.message);
     } finally {
       setIsloading(false);
     }
   }
   async function formhandler(e) {
     e.preventDefault();
-    let result = await createuser(formdata);
-    if (result.success) {
-      toast.success(result.message);
-      navigate("/login");
-    } else {
-      toast.error(result.message);
-    }
+    await createuser(formdata);
   }
   return (
     <div className="bg-[#F1F2F3] px-32 py-10 self-start mt-7">

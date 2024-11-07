@@ -1,3 +1,4 @@
+// Done
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useState } from "react";
@@ -11,21 +12,27 @@ const Orderspage = () => {
   useEffect(() => {
     async function fetchProductData() {
       setIsloading(true);
+      if (!navigator.onLine) {
+        toast.error("Oops, You are Offline!");
+        setIsloading(false);
+        return;
+      }
       try {
-        const res = await fetch(
+        const response = await fetch(
           `${import.meta.env.VITE_API_BACKEND_BASE_URL}/admin/getallorders`,
           {
             method: "GET",
             credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
           }
         );
-        const data = await res.json();
+        const data = await response.json();
+        if (!data.success) {
+          throw new Error(data.message);
+        }
         setOrders(data.orders);
       } catch (error) {
-        toast.error(error.message);
+        console.error(error);
+        toast.error(error.message || "Something went wrong!");
       } finally {
         setIsloading(false);
       }

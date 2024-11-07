@@ -4,14 +4,14 @@ const fileUpload = require("express-fileupload");
 const connectDB = require("./config/database");
 const { cloudinaryConnect } = require("./config/cloudinary");
 
+const OnlyAdmin_routes = require("./routes/OnlyAdmin");
+const Public_routes = require("./routes/Public");
+const Auth_routes = require("./routes/Auth");
+const OnlyCustomer_routes = require("./routes/OnlyCustomers");
+const User_routes = require("./routes/User");
+
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-
-const Admin_routes = require("./routes/Admin_routes");
-const Common_routes = require("./routes/Common_routes");
-const Auth_routes = require("./routes/Auth_routes");
-const Customer_routes = require("./routes/Customer_routes");
-const AuthCommon_routes = require("./routes/AuthCommon_routes");
 
 require("dotenv").config();
 
@@ -41,11 +41,11 @@ const { auth, isCustomer, isAdmin } = require("./middlewares/Auth_middlewares");
 
 // Testing the server
 
-app.use("/admin", auth, isAdmin, Admin_routes);
-app.use("/common", Common_routes);
+app.use("/admin", auth, isAdmin, OnlyAdmin_routes);
+app.use("/common", Public_routes);
 app.use("/auth", Auth_routes);
-app.use("/authCommon", auth, AuthCommon_routes);
-app.use("/customer", auth, isCustomer, Customer_routes);
+app.use("/authCommon", auth, User_routes);
+app.use("/customer", auth, isCustomer, OnlyCustomer_routes);
 
 // Setting up port number
 const PORT = process.env.PORT;

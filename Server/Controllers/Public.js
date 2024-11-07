@@ -1,5 +1,6 @@
 const Subscriber = require("../models/Subscriber");
 const Product = require("../models/Product");
+const mongoose = require("mongoose");
 
 //subscribe
 exports.Subscriberroute = async (req, res) => {
@@ -7,10 +8,7 @@ exports.Subscriberroute = async (req, res) => {
   try {
     const findsubcriber = await Subscriber.findOne({ email });
     if (findsubcriber) {
-      return res.status(400).json({
-        success: false,
-        message: "User Already Registered!",
-      });
+      throw new Error("Already Subscribed!");
     }
 
     await Subscriber.create({ email });
@@ -23,7 +21,7 @@ exports.Subscriberroute = async (req, res) => {
     console.log(error.message);
     return res.status(500).json({
       success: false,
-      message: "Server error",
+      message: error.message,
     });
   }
 };
@@ -40,7 +38,7 @@ exports.GetAllProducts = async (req, res) => {
   } catch (error) {
     return res.status(404).json({
       success: false,
-      message: "something went wrong in GetAllProducts try block",
+      message: error.message,
     });
   }
 };
@@ -49,12 +47,12 @@ exports.GetAllProducts = async (req, res) => {
 exports.GetProductById = async (req, res) => {
   try {
     const productId = req.params.id;
+    if (!mongoose.isValidObjectId(productId)) {
+      throw new Error("Invalid Product Id!");
+    }
     const product = await Product.findById(productId);
     if (!product) {
-      return res.status(404).json({
-        success: false,
-        message: "Product not found",
-      });
+      throw new Error("Product not found!");
     }
     return res.status(200).json({
       success: true,
@@ -63,7 +61,7 @@ exports.GetProductById = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "something went wrong in GetProductById try block",
+      message: error.message,
     });
   }
 };

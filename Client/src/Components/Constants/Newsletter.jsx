@@ -9,6 +9,11 @@ const Newsletter = () => {
 
   async function subscribe(email) {
     setIsloading(true);
+    if (!navigator.onLine) {
+      toast.error("Oops, You are Offline!");
+      setIsloading(false);
+      return;
+    }
     try {
       const result = await fetch(
         `${import.meta.env.VITE_API_BACKEND_BASE_URL}/common/subscribe`,
@@ -21,15 +26,14 @@ const Newsletter = () => {
           body: JSON.stringify({ email }),
         }
       );
-      if (result.ok) {
-        const data = await result.json();
-        toast.success(data.message);
-      } else {
-        const data = await result.json();
-        toast.error(data.message);
+      const data = await result.json();
+      if (!data.success) {
+        throw new Error(data.message);
       }
+      toast.success(data.message);
     } catch (error) {
-      toast.error("Something Went Wrong");
+      console.log(error.message);
+      toast.error(error.message);
     } finally {
       setIsloading(false);
       setEmail("");

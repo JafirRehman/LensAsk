@@ -1,3 +1,4 @@
+// Done
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Spinner from "../../Components/Constants/Spinner";
@@ -22,8 +23,12 @@ const Createproductpage = () => {
 
   async function createproduct(formdata) {
     setIsloading(true);
+    if (!navigator.onLine) {
+      toast.error("Oops, You are Offline!");
+      setIsloading(false);
+      return;
+    }
     try {
-      console.log(formdata);
       const formData = new FormData();
       Object.keys(formdata).forEach((key) => {
         formData.append(key, formdata[key]);
@@ -37,15 +42,14 @@ const Createproductpage = () => {
           body: formData,
         }
       );
-      if (response.ok) {
-        const data = await response.json();
-        toast.success(data.message);
-      } else {
-        const data = await response.json();
-        toast.error(data.message);
+      const data = await response.json();
+      if (!data.success) {
+        throw new Error(data.message);
       }
+      toast.success("Product added successfully!");
     } catch (error) {
-      toast.error(error.message);
+      console.log(error.message);
+      toast.error(error.message || "Something went wrong!");
     } finally {
       setIsloading(false);
     }

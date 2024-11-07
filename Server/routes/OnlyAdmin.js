@@ -1,10 +1,6 @@
 const express = require("express");
 
-const {
-  getAllOrders,
-  createProduct,
-  DeleteProduct,
-} = require("../handlers/Admin_handlers");
+const { getAllOrders, createProduct } = require("../Controllers/OnlyAdmin");
 
 const router = express.Router();
 

@@ -17,10 +17,9 @@ exports.getAllOrders = async (req, res) => {
       orders,
     });
   } catch (error) {
-    console.error(error);
     return res.status(500).json({
       success: false,
-      message: "Server error",
+      message: error.message,
     });
   }
 };
@@ -31,24 +30,23 @@ exports.createProduct = async (req, res) => {
     //get the data of product
     const { title, price, description, category } = req.body;
     if (!req.files || !req.files.image) {
-      return res.status(400).json({
-        success: false,
-        message: "No file was uploaded",
-      });
+      throw new Error("Image is required!");
     }
     // Get image from request files
     const image = req.files.image;
 
     //validate all data
     if (!title || !price || !description || !category || !image) {
-      return res.status(400).json({
-        success: false,
-        message: "All Fields are required",
-      });
+      throw new Error("All fields are required!");
     }
+
     //upload image to cloudinary
-    const result = await filesendtocloudinary(image, FOLDER_NAME);
-    //create course
+    let result = {};
+    try {
+      result = await filesendtocloudinary(image, FOLDER_NAME);
+    } catch (error) {
+      throw new Error(error.message);
+    }
     const newProduct = await Product.create({
       title,
       price,
@@ -72,22 +70,16 @@ exports.createProduct = async (req, res) => {
         );
       }
     } catch (error) {
-      return res.status(500).json({
-        success: false,
-        message: "Cant Send Mail",
-      });
+      console.log(error.message);
     }
-    // Return the new Product and a success message
+
     return res.status(200).json({
       success: true,
-      data: newProduct,
-      message: "Product Created Successfully",
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
-      message: "server error",
+      message: error.message,
     });
   }
 };

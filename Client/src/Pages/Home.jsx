@@ -12,13 +12,22 @@ const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       setIsLoading(true);
+      if (!navigator.onLine) {
+        toast.error("Oops, You are Offline!");
+        setIsLoading(false);
+        return;
+      }
       try {
         const response = await fetch(
           `${import.meta.env.VITE_API_BACKEND_BASE_URL}/common/getallproducts`
         );
         const data = await response.json();
+        if (!data.success) {
+          throw new Error(data.message);
+        }
         setProducts(data.data);
       } catch (error) {
+        console.error(error.message);
         toast.error(error.message);
       } finally {
         setIsLoading(false);

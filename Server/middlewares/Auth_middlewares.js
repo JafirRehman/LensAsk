@@ -1,72 +1,67 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-require('dotenv').config();
+require("dotenv").config();
 
-// This function is used as middleware to authenticate user requests
+// This middleware is used to check if user is authenticated or not
 exports.auth = async (req, res, next) => {
-    try {
-        //get cookie
-        const token =await req.cookies.token
+  try {
+    //get cookie
+    const token = await req.cookies.token;
 
-        // validate token
-        if (!token) {
-            return res.status(401).json({ success: false, message: `Token Missing` });
-        }
-        try {
-            //verify token
-            const decode = jwt.verify(token, process.env.JWT_SECRET);
-            //store token to user
-            req.user = decode;
-        } catch (error) {
-            return res
-                .status(401)
-                .json({ success: false, message: "token is invalid" });
-        }
-        // move to next work
-        next();
-    } catch (error) {
-        console.log(error);
-        return res.status(401).json({
-            success: false,
-            message: `Something Went Wrong inside auth middleware try block`,
-        });
+    // validate token
+    if (!token) {
+      throw new Error("Login First!");
     }
-};
-exports.isCustomer = async (req, res, next) => {
     try {
-        //find user
-        const userDetails = await User.findOne({ email: req.user.email });
-        //validate user
-        if (userDetails.role !== "Customer") {
-            return res.status(401).json({
-                success: false,
-                message: "This is a Protected Route for customers",
-            });
-        }
-        //move to next work
-        next();
+      //verify token
+      const decode = jwt.verify(token, process.env.JWT_SECRET);
+      //store token to user
+      req.user = decode;
     } catch (error) {
-        return res
-            .status(500)
-            .json({ success: false, message: `Something Went Wrong inside isCustomer middleware try block` });
+      throw new Error("Invalid Token!");
     }
+    // move to next work
+    next();
+  } catch (error) {
+    return res.status(401).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// This middleware is used to check if user is customer or not
+exports.isCustomer = async (req, res, next) => {
+  try {
+    //find user
+    const userDetails = await User.findOne({ email: req.user.email });
+    //validate user
+    if (userDetails.role !== "Customer") {
+      throw new Error("Protected Route for customers");
+    }
+    //move to next work
+    next();
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 exports.isAdmin = async (req, res, next) => {
-    try {
-        //find user
-        const userDetails = await User.findOne({ email: req.user.email });
-        //validate user
-        if (userDetails.role !== "Admin") {
-            return res.status(401).json({
-                success: false,
-                message: "This is a Protected Route for Admin",
-            });
-        }
-        //move to next work
-        next();
-    } catch (error) {
-        return res
-            .status(500)
-            .json({ success: false, message: `Something Went Wrong inside isAdmin middleware try block` });
+  try {
+    //find user
+    const userDetails = await User.findOne({ email: req.user.email });
+    //validate user
+    if (userDetails.role !== "Admin") {
+      throw new Error("Protected Route for Admin");
     }
+    //move to next work
+    next();
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };

@@ -21,6 +21,11 @@ const Loginform = () => {
   async function formhandler(e) {
     e.preventDefault();
     setIsLoading(true);
+    if (!navigator.onLine) {
+      toast.error("Oops, You are Offline!");
+      setIsLoading(false);
+      return;
+    }
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_BACKEND_BASE_URL}/auth/login`,
@@ -34,10 +39,14 @@ const Loginform = () => {
         }
       );
       const data = await response.json();
+      if (!data.success) {
+        throw new Error(data.message);
+      }
       dispatch(updateuser(data.existeduser));
       toast.success(data.message);
       navigate("/user/profile");
     } catch (error) {
+      console.error(error.message);
       toast.error(error.message);
     } finally {
       setIsLoading(false);

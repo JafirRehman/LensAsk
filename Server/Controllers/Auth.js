@@ -2,8 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const Product = require("../models/Product");
-const { mailsender } = require("../utils/mailsender");
+
 // LOGIN
 exports.login = async (req, res) => {
   try {
@@ -11,18 +10,12 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
     //validate
     if (!email || !password) {
-      return res.status(400).json({
-        success: false,
-        message: "all feilds are required",
-      });
+      throw new Error("All fields are required!");
     }
     //check user already exist
     const existeduser = await User.findOne({ email }).populate("cart.product");
     if (!existeduser) {
-      return res.status(401).json({
-        success: false,
-        message: "user does not exist",
-      });
+      throw new Error("User not found!");
     }
     //check password match with hasspassword
     if (await bcrypt.compare(password, existeduser.password)) {
@@ -50,20 +43,16 @@ exports.login = async (req, res) => {
       //return res
       return res.status(200).json({
         success: true,
-        message: "user login successfully",
+        message: "Login Successfull!",
         existeduser,
       });
     } else {
-      return res.status(401).json({
-        success: false,
-        message: "wrong login password",
-      });
+      throw new Error("Wrong Password!");
     }
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
-      message: "server error",
+      message: error.message,
     });
   }
 };
@@ -76,12 +65,12 @@ exports.logout = (req, res) => {
     // Return a successful response
     return res.status(200).json({
       success: true,
-      message: "logged out successfully",
+      message: "Logged out Successfully!",
     });
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "Server error",
+      message: error.message,
     });
   }
 };
@@ -92,18 +81,12 @@ exports.signup = async (req, res) => {
     const { name, email, password, role } = req.body;
     //validate the data
     if (!name || !password || !email) {
-      return res.status(403).json({
-        success: false,
-        message: "all feilds are required",
-      });
+      throw new Error("All fields are required!");
     }
     //check if email already exist in USER
     const findinguser = await User.findOne({ email });
     if (findinguser) {
-      return res.status(400).json({
-        success: false,
-        message: "user already exist",
-      });
+      throw new Error("User already exist with this email!");
     }
     //secure the password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -125,13 +108,12 @@ exports.signup = async (req, res) => {
     //return response
     return res.status(200).json({
       success: true,
-      message: "User registered successfully",
+      message: "User Created Successfully!",
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
-      message: "server catch a issue",
+      message: error.message,
     });
   }
 };

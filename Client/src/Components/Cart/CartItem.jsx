@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { MdDeleteSweep } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
 import Spinner from "../Constants/Spinner";
 import { useState } from "react";
@@ -11,98 +10,102 @@ const CartItem = ({ item }) => {
   const [removeloading, setRemoveloading] = useState(false);
   const [addloading, setAddloading] = useState(false);
   const [reduceloading, setReduceloading] = useState(false);
-
-  const userState = useSelector((state) => state.user);
-
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const removeItemfromCart = async (productId) => {
-    if (userState.user) {
-      setRemoveloading(true);
-      try {
-        const response = await fetch(
-          `${
-            import.meta.env.VITE_API_BACKEND_BASE_URL
-          }/customer/removefromcart`,
-          {
-            method: "POST",
-            credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ productId }),
-          }
-        );
-        const data = await response.json();
-        dispatch(updateuser(data.existeduser));
-        toast.success("Product Removed Successfully!");
-      } catch (error) {
-        toast.error(error.message);
-      } finally {
-        setRemoveloading(false);
+    setRemoveloading(true);
+    if (!navigator.onLine) {
+      toast.error("Oops, You are Offline!");
+      setRemoveloading(false);
+      return;
+    }
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BACKEND_BASE_URL}/customer/removefromcart`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId }),
+        }
+      );
+      const data = await response.json();
+      if (!data.success) {
+        throw new Error(data.message);
       }
-    } else {
-      toast.error("Login First!");
-      navigate("/login");
+      dispatch(updateuser(data.existeduser));
+      toast.success(data.message);
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+    } finally {
+      setRemoveloading(false);
     }
   };
 
   const reduceItemQuantity = async (productId) => {
-    if (userState.user) {
-      setReduceloading(true);
-      try {
-        const response = await fetch(
-          `${
-            import.meta.env.VITE_API_BACKEND_BASE_URL
-          }/customer/reducequantity`,
-          {
-            method: "POST",
-            credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ productId }),
-          }
-        );
-        const data = await response.json();
-        dispatch(updateuser(data.existeduser));
-      } catch (error) {
-        toast.error(error.message);
-      } finally {
-        setReduceloading(false);
+    setReduceloading(true);
+    if (!navigator.onLine) {
+      toast.error("Oops, You are Offline!");
+      setReduceloading(false);
+      return;
+    }
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BACKEND_BASE_URL}/customer/reducequantity`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId }),
+        }
+      );
+      const data = await response.json();
+      if (!data.success) {
+        throw new Error(data.message);
       }
-    } else {
-      toast.error("Login First!");
-      navigate("/login");
+      dispatch(updateuser(data.existeduser));
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+    } finally {
+      setReduceloading(false);
     }
   };
 
   const addToCart = async (productId) => {
-    if (userState.user) {
-      setAddloading(true);
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_BACKEND_BASE_URL}/customer/addtocart`,
-          {
-            method: "POST",
-            credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ productId }),
-          }
-        );
-        const data = await response.json();
-        dispatch(updateuser(data.existeduser));
-      } catch (error) {
-        toast.error(error.message);
-      } finally {
-        setAddloading(false);
+    setAddloading(true);
+    if (!navigator.onLine) {
+      toast.error("Oops, You are Offline!");
+      setAddloading(false);
+      return;
+    }
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BACKEND_BASE_URL}/customer/addtocart`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId }),
+        }
+      );
+      const data = await response.json();
+      if (!data.success) {
+        throw new Error(data.message);
       }
-    } else {
-      toast.error("Login First!");
-      navigate("/login");
+      dispatch(updateuser(data.existeduser));
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+    } finally {
+      setAddloading(false);
     }
   };
   return (

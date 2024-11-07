@@ -12,6 +12,10 @@ const Header = () => {
   const userState = useSelector((state) => state.user);
 
   async function logoutfunc() {
+    if (!navigator.onLine) {
+      toast.error("Oops, You are Offline!");
+      return;
+    }
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_BACKEND_BASE_URL}/auth/logout`,
@@ -24,10 +28,14 @@ const Header = () => {
         }
       );
       const data = await response.json();
+      if (!data.success) {
+        throw new Error(data.message);
+      }
       dispatch(userlogoutReducer());
       toast.success(data.message);
       navigate("/login");
     } catch (error) {
+      console.log(error.message);
       toast.error(error.message);
     }
   }

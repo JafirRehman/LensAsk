@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import CusOrderspage from "../../Pages/Customer/CusOrderspage";
+import CusOrderspage from "../../Pages/Customer/CusOrdersList";
 
 const Intro = ({ userState }) => {
   return (

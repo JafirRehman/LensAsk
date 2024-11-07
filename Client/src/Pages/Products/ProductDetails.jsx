@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Spinner from "../../Components/Constants/Spinner";
 import { useDispatch } from "react-redux";
-import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { updateuser } from "../../redux/Slices/UserSlice";
+import toast from "react-hot-toast";
+import Spinner from "../../Components/Constants/Spinner";
 
 const ProductDetails = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,6 +14,11 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProductById = async () => {
       setIsLoading(true);
+      if (!navigator.onLine) {
+        toast.error("Oops, You are Offline!");
+        setIsLoading(false);
+        return;
+      }
       try {
         const response = await fetch(
           `${
@@ -21,8 +26,12 @@ const ProductDetails = () => {
           }/common/getproduct/${productid}`
         );
         const data = await response.json();
+        if (!data.success) {
+          throw new Error(data.message);
+        }
         setProduct(data.data);
       } catch (error) {
+        console.log(error.message);
         toast.error(error.message);
       } finally {
         setIsLoading(false);
@@ -38,59 +47,67 @@ const ProductDetails = () => {
   const usercart = userState.user.cart;
 
   const addToCart = async (productId) => {
-    if (userState?.user) {
-      setIsLoading(true);
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_BACKEND_BASE_URL}/customer/addtocart`,
-          {
-            method: "POST",
-            credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ productId }),
-          }
-        );
-        const data = await response.json();
-        dispatch(updateuser(data.existeduser));
-        toast.success("Product Added Successfully!");
-      } catch (error) {
-        toast.error(error.message);
-      } finally {
-        setIsLoading(false);
+    setIsLoading(true);
+    if (!navigator.onLine) {
+      toast.error("Oops, You are Offline!");
+      setIsLoading(false);
+      return;
+    }
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BACKEND_BASE_URL}/customer/addtocart`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId }),
+        }
+      );
+      const data = await response.json();
+      if (!data.success) {
+        throw new Error(data.message);
       }
-    } else {
-      toast.error("Login First!");
+      dispatch(updateuser(data.existeduser));
+      toast.success(data.message);
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
   const removefromCart = async (productId) => {
-    if (userState.user) {
-      setIsLoading(true);
-      try {
-        const response = await fetch(
-          `${
-            import.meta.env.VITE_API_BACKEND_BASE_URL
-          }/customer/removefromcart`,
-          {
-            method: "POST",
-            credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ productId }),
-          }
-        );
-        const data = await response.json();
-        dispatch(updateuser(data.existeduser));
-        toast.success("Product Removed Successfully!");
-      } catch (error) {
-        toast.error(error.message);
-      } finally {
-        setIsLoading(false);
+    setIsLoading(true);
+    if (!navigator.onLine) {
+      toast.error("Oops, You are Offline!");
+      setIsLoading(false);
+      return;
+    }
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BACKEND_BASE_URL}/customer/removefromcart`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId }),
+        }
+      );
+      const data = await response.json();
+      if (!data.success) {
+        throw new Error(data.message);
       }
-    } else {
-      toast.error("Login First!");
+      dispatch(updateuser(data.existeduser));
+      toast.success(data.message);
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
