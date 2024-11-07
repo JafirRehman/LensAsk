@@ -19,6 +19,7 @@ import Header from "./Components/Constants/Header.jsx";
 import Footer from "./Components/Constants/Footer.jsx";
 import ScrollToTop from "./Components/Constants/ScrollToTop.jsx";
 import Newsletter from "./Components/Constants/Newsletter.jsx";
+import Error from "./Components/Constants/Error.jsx";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
       <Toaster />
       <Header />
       <Routes>
+        {/** PUBLIC ROUTES */}
         <Route exact path="/" element={<Home />} />
         <Route exact path="/products" element={<Products />} />
         <Route
@@ -55,6 +57,7 @@ const App = () => {
             element={<Createproductpage />}
           />
         </Route>
+        <Route path="*" element={<Error />} />
       </Routes>
       <Newsletter />
       <Footer />

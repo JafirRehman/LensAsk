@@ -1,6 +1,5 @@
 import { FaCartShopping } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import Logoimg from "../../assets/logo.png";
 import "../../styles/Header.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { userlogoutReducer } from "../../redux/Slices/UserSlice";
@@ -71,7 +70,7 @@ const Header = () => {
             )}
           </ul>
           <div className="center" onClick={() => navigate("/")}>
-            <img src={Logoimg} width={250} />
+            <img src="/assets/logo.png" width={250} />
           </div>
           {userState.user && (
             <div className="right cursor-pointer">
