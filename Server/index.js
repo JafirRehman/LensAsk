@@ -31,7 +31,7 @@ app.use(
   })
 );
 const corsOptions = {
-  origin: true,
+  origin: `${process.env.FRONTEND_BASE_URL}`,
   optionsSuccessStatus: 200,
   credentials: true,
 };
