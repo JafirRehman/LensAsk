@@ -23,7 +23,14 @@ const ProductDetails = () => {
         const response = await fetch(
           `${
             import.meta.env.VITE_API_BACKEND_BASE_URL
-          }/common/getproduct/${productid}`
+          }/common/getproduct/${productid}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
         );
         const data = await response.json();
         if (!data.success) {

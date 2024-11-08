@@ -19,7 +19,14 @@ const Home = () => {
       }
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_BACKEND_BASE_URL}/common/getallproducts`
+          `${import.meta.env.VITE_API_BACKEND_BASE_URL}/common/getallproducts`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
         );
         const data = await response.json();
         if (!data.success) {
