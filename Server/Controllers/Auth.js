@@ -39,6 +39,7 @@ exports.login = async (req, res) => {
         httpOnly: true,
         sameSite: "none",
         secure: true,
+        path: "/",
       };
       res.cookie("token", token, options);
       //return res
