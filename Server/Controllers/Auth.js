@@ -37,9 +37,8 @@ exports.login = async (req, res) => {
       const options = {
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
         httpOnly: true,
-        sameSite: "none",
+        sameSite: "None",
         secure: true,
-        path: "/",
       };
       res.cookie("token", token, options);
       //return res
@@ -62,12 +61,7 @@ exports.login = async (req, res) => {
 exports.logout = (req, res) => {
   try {
     // Clear the cookie that's holding the JWT
-    res.clearCookie("token", {
-      httpOnly: true,
-      sameSite: "none",
-      secure: true,
-      path: "/",
-    });
+    res.clearCookie("token");
 
     // Return a successful response
     return res.status(200).json({
