@@ -61,7 +61,11 @@ exports.login = async (req, res) => {
 exports.logout = (req, res) => {
   try {
     // Clear the cookie that's holding the JWT
-    res.clearCookie("token");
+    res.clearCookie("token", {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+    });
 
     // Return a successful response
     return res.status(200).json({
