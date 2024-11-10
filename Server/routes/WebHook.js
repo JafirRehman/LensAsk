@@ -52,31 +52,26 @@ router.post(
         $set: { cart: [] },
       });
 
-      try {
-        await mailsender(
-          ourneworder.email,
-          "Order Confirmation",
-          `<div style="max-width: 32rem; margin: 0 auto; padding: 1rem; background-color: #ffffff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); border-radius: 0.5rem; color: #374151;">
-                    <h1 style="font-size: 1.25rem; font-weight: 700; color: #374151;">Order Confirmation</h1>
-                    <p style="font-size: 0.875rem; color: #6B7280; margin-top: 0.5rem;">Hi ${ourneworder.receiverName},</p>
-                    <p style="font-size: 0.875rem; color: #6B7280; margin-top: 0.5rem;">Thank you for your order. We are happy to confirm that your order has been received and is being processed.</p>
-                    <div style="margin-top: 1rem;">
-                        <p style="font-size: 0.875rem; color: #6B7280;">Order Details:</p>
-                        <ul style="font-size: 0.875rem; color: #6B7280; list-style-type: disc; list-style-position: inside; margin-top: 0.5rem;">
-                            <li>Order ID: ${ourneworder._id}</li>
-                            <li>Address: ${ourneworder.address}</li>
-                            <li>Total: Rs.${ourneworder.totalPrice}</li>
-                        </ul>
-                    </div>
-                    <p style="font-size: 0.875rem; color: #6B7280; margin-top: 1rem;">You will receive a shipping confirmation email once your order has been dispatched.</p>
-                    <p style="font-size: 0.875rem; color: #6B7280; margin-top: 1rem;">Thank you for shopping with us!</p>
-                    <p style="font-size: 0.875rem; color: #6B7280; margin-top: 0.5rem;">Best Regards,</p>
-                    <p style="font-size: 0.875rem; color: #6B7280;">LensAsk</p>
-                </div>`
-        );
-      } catch (error) {
-        return res.status(500).send(error).json({ message: error.message });
-      }
+      await mailsender(
+        customerEmail,
+        "Order Confirmation",
+        `<div style="max-width: 32rem; margin: 0 auto; padding: 1rem; background-color: #ffffff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); border-radius: 0.5rem; color: #374151;">
+                  <h1 style="font-size: 1.25rem; font-weight: 700; color: #374151;">Order Confirmation</h1>
+                  <p style="font-size: 0.875rem; color: #6B7280; margin-top: 0.5rem;">Hi ${customerName},</p>
+                  <p style="font-size: 0.875rem; color: #6B7280; margin-top: 0.5rem;">Thank you for your order. We are happy to confirm that your order has been received and is being processed.</p>
+                  <div style="margin-top: 1rem;">
+                      <p style="font-size: 0.875rem; color: #6B7280;">Order Details:</p>
+                      <ul style="font-size: 0.875rem; color: #6B7280; list-style-type: disc; list-style-position: inside; margin-top: 0.5rem;">
+                          <li>Address: ${addressString}</li>
+                          <li>Total: Rs.${totalPrice}</li>
+                      </ul>
+                  </div>
+                  <p style="font-size: 0.875rem; color: #6B7280; margin-top: 1rem;">You will receive a shipping confirmation email once your order has been dispatched.</p>
+                  <p style="font-size: 0.875rem; color: #6B7280; margin-top: 1rem;">Thank you for shopping with us!</p>
+                  <p style="font-size: 0.875rem; color: #6B7280; margin-top: 0.5rem;">Best Regards,</p>
+                  <p style="font-size: 0.875rem; color: #6B7280;">LensAsk</p>
+              </div>`
+      );
     }
     res.send();
   }
