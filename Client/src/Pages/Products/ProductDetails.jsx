@@ -132,9 +132,7 @@ const ProductDetails = () => {
             <p className="mt-4 text-zinc-600">{`Rs . ${product.price}`}</p>
             <div className="mt-4">
               {userState.user.role !== "Admin" &&
-                (usercart?.some(
-                  (pro) => toString(pro._id) === toString(product._id)
-                ) ? (
+                (usercart?.some((pro) => pro._id === product._id) ? (
                   <button
                     className="bg-[#0E0E11] text-ourred-50 hover:scale-90 transition-all duration-200 h-10 w-40 rounded-lg mt-4"
                     onClick={() => {
