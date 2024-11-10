@@ -45,9 +45,6 @@ const Ordercomponent = ({ order }) => {
         <p className="text-zinc-500 dark:text-zinc-400 capitalize">
           Receiver Name: {order.receiverName}
         </p>
-        <p className="text-zinc-500 dark:text-zinc-400">
-          Phone Number: {order.phoneNumber}
-        </p>
         <p className="text-zinc-500 dark:text-zinc-400">Email: {order.email}</p>
         <p className="text-zinc-500 dark:text-zinc-400">
           Address: {order.address}

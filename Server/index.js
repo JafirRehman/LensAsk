@@ -4,11 +4,16 @@ const fileUpload = require("express-fileupload");
 const connectDB = require("./config/database");
 const { cloudinaryConnect } = require("./config/cloudinary");
 
+const User = require("./models/User");
+const Order = require("./models/Order");
+
 const OnlyAdmin_routes = require("./routes/OnlyAdmin");
 const Public_routes = require("./routes/Public");
 const Auth_routes = require("./routes/Auth");
 const OnlyCustomer_routes = require("./routes/OnlyCustomers");
 const User_routes = require("./routes/User");
+
+const { auth, isCustomer, isAdmin } = require("./middlewares/Auth_middlewares");
 
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
@@ -19,7 +24,6 @@ const app = express();
 // Connecting to database and cloudinary
 connectDB();
 cloudinaryConnect();
-
 // Middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -36,36 +40,59 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-app.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
-  const endpointSecret = process.env.STRIPE_SIGNING_SECRET;
+app.post(
+  "/webhook",
+  auth,
+  express.raw({ type: "application/json" }),
+  async (req, res) => {
+    const { id } = req.user;
+    const endpointSecret = process.env.STRIPE_SIGNING_SECRET;
 
-  const payload = req.body;
-  const sig = req.headers["stripe-signature"];
+    const payload = req.body;
+    const sig = req.headers["stripe-signature"];
 
-  let event;
-  try {
-    event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
-  } catch (err) {
-    res.status(400).send(`Webhook Error: ${err.message}`);
-    return;
+    let event;
+    try {
+      event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
+    } catch (err) {
+      res.status(400).send(`Webhook Error: ${err.message}`);
+      return;
+    }
+    if (event.type === "checkout.session.completed") {
+      const checkoutSession = event.data.object;
+      const customerAddress = checkoutSession.customer_details?.address;
+      const customerName = checkoutSession.customer_details?.name;
+      const customerEmail = checkoutSession.customer_details?.email;
+      const totalPrice = parseFloat(
+        checkoutSession.amount_total / 100
+      ).toString();
+      const addressString = `
+        City: ${customerAddress.city || ""}
+        Country: ${customerAddress.country || ""}
+        Address Line 1: ${customerAddress.line1 || ""}
+        Address Line 2: ${customerAddress.line2 || ""}
+      `.trim();
+
+      const user = await User.findById(id).populate("cart.product");
+
+      await Order.create({
+        userid: id,
+        receiverName: customerName,
+        email: customerEmail,
+        address: addressString,
+        totalPrice: totalPrice,
+        products: user.cart,
+      });
+
+      await User.findByIdAndUpdate(id, {
+        $set: { cart: [] },
+      });
+    }
+    res.send();
   }
+);
 
-  switch (event.type) {
-    case "checkout.session.completed":
-      const checkoutSessionCompleted = event.data.object;
-      console.log(checkoutSessionCompleted);
-      // Then define and call a function to handle the event checkout.session.completed
-      break;
-    // ... handle other event types
-    default:
-      console.log(`Unhandled event type ${event.type}`);
-  }
-
-  res.send();
-});
 app.use(express.json());
-const { auth, isCustomer, isAdmin } = require("./middlewares/Auth_middlewares");
-
 // Testing the server
 
 app.use("/admin", auth, isAdmin, OnlyAdmin_routes);

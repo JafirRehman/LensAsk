@@ -19,10 +19,6 @@ const OrderSchema = new mongoose.Schema({
     required: true,
   },
   totalPrice: {
-    type: Number,
-    required: true,
-  },
-  phoneNumber: {
     type: String,
     required: true,
   },
