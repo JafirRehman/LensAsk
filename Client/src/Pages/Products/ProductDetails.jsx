@@ -131,26 +131,27 @@ const ProductDetails = () => {
             <p className="mt-4 text-zinc-600 capitalize">{`Brand : ${product.category}`}</p>
             <p className="mt-4 text-zinc-600">{`Rs . ${product.price}`}</p>
             <div className="mt-4">
-              {userState.user.role !== "Admin" &&
-                (usercart?.some((pro) => pro._id === product._id) ? (
-                  <button
-                    className="bg-[#0E0E11] text-ourred-50 hover:scale-90 transition-all duration-200 h-10 w-40 rounded-lg mt-4"
-                    onClick={() => {
-                      removefromCart(product._id);
-                    }}
-                  >
-                    {isLoading ? <Spinner status={true} /> : "Remove From Cart"}
-                  </button>
-                ) : (
-                  <button
-                    className="bg-[#0E0E11] text-ourred-50 hover:scale-90 transition-all duration-200 h-10 w-40 rounded-lg mt-4"
-                    onClick={() => {
-                      addToCart(product._id);
-                    }}
-                  >
-                    {isLoading ? <Spinner status={true} /> : "Add to Cart"}
-                  </button>
-                ))}
+              {userState.user.role !== "Admin" && (
+                <button
+                  className="bg-[#0E0E11] text-ourred-50 hover:scale-90 transition-all duration-200 h-10 w-40 rounded-lg mt-4"
+                  onClick={() => {
+                    const product = usercart.some(
+                      (pro) => pro._id === product._id
+                    );
+                    product
+                      ? removefromCart(product._id)
+                      : addToCart(product._id);
+                  }}
+                >
+                  {isLoading ? (
+                    <Spinner status={true} />
+                  ) : usercart.some((pro) => pro._id === product._id) ? (
+                    "Remove from Cart"
+                  ) : (
+                    "Add to Cart"
+                  )}
+                </button>
+              )}
             </div>
           </div>
         </div>
