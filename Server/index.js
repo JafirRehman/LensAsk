@@ -40,6 +40,8 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
+// Webhook
 app.post(
   "/webhook",
   express.raw({ type: "application/json" }),
@@ -65,11 +67,9 @@ app.post(
       const totalPrice = parseFloat(
         checkoutSession.amount_total / 100
       ).toString();
-      const addressString = `
-        City: ${customerAddress.city || ""}
-        Country: ${customerAddress.country || ""}
-        Address Line 1: ${customerAddress.line1 || ""}
-        Address Line 2: ${customerAddress.line2 || ""}
+      const addressString = `${customerAddress.city || ""} ${
+        customerAddress.line2 || ""
+      } ${customerAddress.line1 || ""} ${customerAddress.country || ""}
       `.trim();
 
       const user = await User.findById(id).populate("cart.product");
