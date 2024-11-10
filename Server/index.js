@@ -46,6 +46,38 @@ app.use("/common", Public_routes);
 app.use("/auth", Auth_routes);
 app.use("/authCommon", auth, User_routes);
 app.use("/customer", auth, isCustomer, OnlyCustomer_routes);
+//webhook
+const stripe = require("stripe")(
+  "sk_test_51PKkDASBSYlvW4A9XhUFrmzav3bxXZi4IfsQ14jKZzyhLtfCnmQojh4MeWIJNLW1pFq20MEeqJsK3wExfHzUVecp00Yg8GP36q"
+);
+app.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
+  const endpointSecret =
+    "whsec_12e6926ec75b07b76ee754f7a2b79d68b5937f255cdd38d15fd6df106ecce490";
+
+  const payload = req.body;
+  const sig = req.headers["stripe-signature"];
+
+  let event;
+  try {
+    event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
+  } catch (err) {
+    response.status(400).send(`Webhook Error: ${err.message}`);
+    return;
+  }
+
+  switch (event.type) {
+    case "checkout.session.completed":
+      const checkoutSessionCompleted = event.data.object;
+      console.log(checkoutSessionCompleted);
+      // Then define and call a function to handle the event checkout.session.completed
+      break;
+    // ... handle other event types
+    default:
+      console.log(`Unhandled event type ${event.type}`);
+  }
+
+  response.send();
+});
 
 // Setting up port number
 const PORT = process.env.PORT;
