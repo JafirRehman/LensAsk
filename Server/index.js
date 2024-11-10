@@ -22,7 +22,6 @@ cloudinaryConnect();
 
 // Middlewares
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
 app.use(cookieParser());
 app.use(
   fileUpload({
@@ -36,17 +35,6 @@ const corsOptions = {
   credentials: true,
 };
 app.use(cors(corsOptions));
-
-const { auth, isCustomer, isAdmin } = require("./middlewares/Auth_middlewares");
-
-// Testing the server
-
-app.use("/admin", auth, isAdmin, OnlyAdmin_routes);
-app.use("/common", Public_routes);
-app.use("/auth", Auth_routes);
-app.use("/authCommon", auth, User_routes);
-app.use("/customer", auth, isCustomer, OnlyCustomer_routes);
-//webhook
 const stripe = require("stripe")(
   "sk_test_51PKkDASBSYlvW4A9XhUFrmzav3bxXZi4IfsQ14jKZzyhLtfCnmQojh4MeWIJNLW1pFq20MEeqJsK3wExfHzUVecp00Yg8GP36q"
 );
@@ -78,6 +66,16 @@ app.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
 
   res.send();
 });
+app.use(express.json());
+const { auth, isCustomer, isAdmin } = require("./middlewares/Auth_middlewares");
+
+// Testing the server
+
+app.use("/admin", auth, isAdmin, OnlyAdmin_routes);
+app.use("/common", Public_routes);
+app.use("/auth", Auth_routes);
+app.use("/authCommon", auth, User_routes);
+app.use("/customer", auth, isCustomer, OnlyCustomer_routes);
 
 // Setting up port number
 const PORT = process.env.PORT;
