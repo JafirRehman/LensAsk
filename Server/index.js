@@ -35,12 +35,9 @@ const corsOptions = {
   credentials: true,
 };
 app.use(cors(corsOptions));
-const stripe = require("stripe")(
-  "sk_test_51PKkDASBSYlvW4A9XhUFrmzav3bxXZi4IfsQ14jKZzyhLtfCnmQojh4MeWIJNLW1pFq20MEeqJsK3wExfHzUVecp00Yg8GP36q"
-);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 app.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
-  const endpointSecret =
-    "whsec_12e6926ec75b07b76ee754f7a2b79d68b5937f255cdd38d15fd6df106ecce490";
+  const endpointSecret = process.env.STRIPE_SIGNING_SECRET;
 
   const payload = req.body;
   const sig = req.headers["stripe-signature"];
