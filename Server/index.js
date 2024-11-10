@@ -61,7 +61,7 @@ app.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
   try {
     event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
   } catch (err) {
-    response.status(400).send(`Webhook Error: ${err.message}`);
+    res.status(400).send(`Webhook Error: ${err.message}`);
     return;
   }
 
@@ -76,7 +76,7 @@ app.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
       console.log(`Unhandled event type ${event.type}`);
   }
 
-  response.send();
+  res.send();
 });
 
 // Setting up port number
