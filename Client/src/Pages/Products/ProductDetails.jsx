@@ -135,10 +135,10 @@ const ProductDetails = () => {
                 <button
                   className="bg-[#0E0E11] text-ourred-50 hover:scale-90 transition-all duration-200 h-10 w-40 rounded-lg mt-4"
                   onClick={() => {
-                    const product = usercart.some(
+                    const isproduct = usercart.some(
                       (pro) => pro._id === product._id
                     );
-                    product
+                    isproduct
                       ? removefromCart(product._id)
                       : addToCart(product._id);
                   }}
