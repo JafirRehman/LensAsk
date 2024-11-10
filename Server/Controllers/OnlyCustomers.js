@@ -35,6 +35,7 @@ exports.cartsession = async (req, res) => {
       line_items: usercart,
       billing_address_collection: "auto",
       mode: "payment",
+      client_reference_id: id,
       success_url: `${process.env.FRONTEND_BASE_URL}/success`,
       cancel_url: `${process.env.FRONTEND_BASE_URL}/cancel`,
     });

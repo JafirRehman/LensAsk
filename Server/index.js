@@ -42,10 +42,8 @@ app.use(cors(corsOptions));
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 app.post(
   "/webhook",
-  auth,
   express.raw({ type: "application/json" }),
   async (req, res) => {
-    const { id } = req.user;
     const endpointSecret = process.env.STRIPE_SIGNING_SECRET;
 
     const payload = req.body;
@@ -63,6 +61,7 @@ app.post(
       const customerAddress = checkoutSession.customer_details?.address;
       const customerName = checkoutSession.customer_details?.name;
       const customerEmail = checkoutSession.customer_details?.email;
+      const id = checkoutSession.client_reference_id;
       const totalPrice = parseFloat(
         checkoutSession.amount_total / 100
       ).toString();
