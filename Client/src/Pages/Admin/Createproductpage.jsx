@@ -2,6 +2,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Spinner from "../../Components/Constants/Spinner";
+import { useNavigate } from "react-router-dom";
 
 const Createproductpage = () => {
   const [formdata, setFormdata] = useState({
@@ -12,6 +13,7 @@ const Createproductpage = () => {
     image: "",
   });
   const [isloading, setIsloading] = useState(false);
+  const navigate = useNavigate();
 
   function changeformvalues(e) {
     if (e.target.type === "file") {
@@ -47,9 +49,10 @@ const Createproductpage = () => {
         throw new Error(data.message);
       }
       toast.success("Product added successfully!");
+      navigate("/products");
     } catch (error) {
       console.log(error.message);
-      toast.error(error.message || "Something went wrong!");
+      toast.error(error.message);
     } finally {
       setIsloading(false);
     }

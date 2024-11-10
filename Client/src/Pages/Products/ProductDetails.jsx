@@ -131,12 +131,12 @@ const ProductDetails = () => {
             <p className="mt-4 text-zinc-600 capitalize">{`Brand : ${product.category}`}</p>
             <p className="mt-4 text-zinc-600">{`Rs . ${product.price}`}</p>
             <div className="mt-4">
-              {userState.user.role !== "Admin" && (
+              {userState?.user?.role !== "Admin" && (
                 <button
                   className="bg-[#0E0E11] text-ourred-50 hover:scale-90 transition-all duration-200 h-10 w-40 rounded-lg mt-4"
                   onClick={() => {
-                    const isproduct = usercart.some(
-                      (pro) => pro._id === product._id
+                    const isproduct = usercart?.some(
+                      (pro) => pro?.product?._id === product?._id
                     );
                     isproduct
                       ? removefromCart(product._id)
@@ -145,7 +145,9 @@ const ProductDetails = () => {
                 >
                   {isLoading ? (
                     <Spinner status={true} />
-                  ) : usercart.some((pro) => pro._id === product._id) ? (
+                  ) : usercart?.some(
+                      (pro) => pro?.product?._id === product?._id
+                    ) ? (
                     "Remove from Cart"
                   ) : (
                     "Add to Cart"

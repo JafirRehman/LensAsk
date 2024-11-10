@@ -15,7 +15,7 @@ const Cartpage = () => {
     setTotalAmount(
       user?.cart?.reduce(
         (previous, item) =>
-          previous + parseInt(item.product.price) * item.quantity,
+          previous + parseInt(item?.product?.price) * item?.quantity,
         0
       )
     );
@@ -60,10 +60,10 @@ const Cartpage = () => {
 
   return (
     <div>
-      {user && user.cart.length > 0 ? (
+      {user && user?.cart?.length > 0 ? (
         <div className="flex gap-16 max-w-6xl p-6 mx-auto flex-wrap lg:flex-nowrap">
           <div className="lg:w-[70%]">
-            {user.cart.map((item, index) => {
+            {user?.cart?.map((item, index) => {
               return <CartItem key={item._id} item={item} itemIndex={index} />;
             })}
           </div>
@@ -77,7 +77,7 @@ const Cartpage = () => {
               </p>
               <p className="font-[600] text-xl text-slate-700">
                 Total Items:{" "}
-                <span className="font-normal">{user.cart.length}</span>
+                <span className="font-normal">{user?.cart?.length}</span>
               </p>
               <p className="mt-5 text-slate-700 text-xl font-[600] mb-5 ">
                 Total Amount:

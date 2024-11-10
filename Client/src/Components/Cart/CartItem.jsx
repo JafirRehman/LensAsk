@@ -113,18 +113,18 @@ const CartItem = ({ item }) => {
       <div className="flex justify-between items-center py-3.5 px-2.5 gap-14 flex-col md:flex-row">
         <div className="md:w-[30%] w-full flex justify-center items-center">
           <img
-            src={item.product.image}
+            src={item?.product?.image}
             alt="product image"
             className="w-[40%] max-h-[200px] md:w-[50%] lg:w-full"
           />
         </div>
         <div className="md:w-[70%] w-full flex flex-col gap-5">
           <h1 className="text-xl font-[600] text-slate-700">
-            {item.product.title}
+            {item?.product?.title}
           </h1>
           <div className="flex justify-between items-center">
             <p className="font-bold text-[#16a34a] text-lg">
-              Rs. <span className="text-[#0E0E11]">{item.product.price}</span>
+              Rs. <span className="text-[#0E0E11]">{item?.product?.price}</span>
             </p>
             <div className="flex gap-5 justify-center items-center">
               <button
@@ -133,7 +133,7 @@ const CartItem = ({ item }) => {
               >
                 {reduceloading ? <Spinner status={true} /> : "-"}
               </button>
-              <h5>{item.quantity}</h5>
+              <h5>{item?.quantity}</h5>
               <button
                 onClick={() => addToCart(item.product._id)}
                 className="bg-[#F1F2F3] w-[38px] text-[1.5rem] font-bold rounded-full"

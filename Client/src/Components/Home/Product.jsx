@@ -100,9 +100,9 @@ const Product = ({ post }) => {
           >
             Details
           </button>
-          {userState.user.role !== "Admin" &&
+          {userState?.user?.role !== "Admin" &&
             (usercart?.length > 0 &&
-            usercart?.some((pro) => pro.product._id === post._id) ? (
+            usercart?.some((pro) => pro?.product?._id === post._id) ? (
               <button
                 className="text-gray-700 border-2 border-gray-700 rounded-md font-semibold text-[12px] h-10 w-40 uppercase hover:bg-gray-700 hover:text-white transition duration-300 ease-in"
                 onClick={() => {
