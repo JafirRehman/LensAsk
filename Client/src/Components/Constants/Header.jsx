@@ -66,13 +66,13 @@ const Header = () => {
         >
           <div
             ref={menuRef} // Attach ref to the menu div
-            className="w-[230px] bg-[#212121] h-full p-4"
+            className="w-[300px] bg-[#212121] h-full p-4"
           >
             <Link
               to="/"
               className={`${
                 matchRoutes("/") && "text-ourred-500"
-              } flex items-center justify-center p-2 mb-2 rounded-lg border`}
+              } flex items-center text-3xl justify-center p-2 mb-2 rounded-lg border`}
             >
               Home
             </Link>
