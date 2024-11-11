@@ -4,7 +4,7 @@ import "../../styles/Banner.scss";
 const Banner = () => {
   const navigate = useNavigate();
   return (
-    <div className="hero-banner py-[80px]">
+    <div className="hero-banner py-[80px] h-screen">
       <div className="content">
         <div className="text-content">
           <h1>Style meets vision.</h1>
