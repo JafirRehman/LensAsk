@@ -1,7 +1,6 @@
 @import "../css-config//mixins.scss";
 
 .hero-banner {
-  padding: 180px 0;
   position: relative;
   background-image: url("/assets/bannner-img.avif");
   height: 100vh;
@@ -66,7 +65,6 @@
         font-weight: 700;
         line-height: 1;
         color: white;
-        margin-bottom: 20px;
 
         @include md {
           font-size: 80px;
@@ -77,7 +75,6 @@
         max-width: 300px;
         font-size: 14px;
         line-height: 20px;
-        margin-bottom: 20px;
 
         @include md {
           max-width: 500px;
