@@ -9,8 +9,8 @@ const Banner = () => {
         <div className="text-content">
           <h1>Style meets vision.</h1>
           <p>
-            premium clear and sun prescription lenses, from regular and thin
-            Persol Signature lenses to our top line of Premium Glass lenses.
+            Premium Clear And Aun Arescription Lenses, From Regular And Thin
+            Persol Signature Lenses To Our Top Line Of Premium Glass Lenses.
           </p>
           <div className="ctas">
             <button
