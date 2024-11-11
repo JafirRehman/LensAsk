@@ -63,27 +63,23 @@ const Loginform = () => {
   }
 
   return (
-    <div className="bg-[#F1F2F3] p-14 self-start mt-12">
+    <div className="mt-20 mobile:mt-24">
+      <h1 className="font-bold text-[36px]">Login to Exclusive</h1>
+      <h2>Enter your details below</h2>
       <form
         onSubmit={formhandler}
         className="flex flex-col text-[1.2rem] mobile:text-[1.2rem]"
       >
-        <label htmlFor="email" className="mt-2 mb-2">
-          Email Address<span className="text-ourred-500">*</span>
-        </label>
         <input
           onChange={changeformvalues}
           name="email"
           value={formdata.email}
           required
           id="email"
-          className="text-[1rem] h-[50px] p-5 focus:outline-none text-white"
+          className="text-[1rem] h-[50px] p-2 focus:outline-none border-b-2 my-7 mobile:w-[400px]"
           type="email"
-          placeholder="Enter Email Address"
+          placeholder="Email"
         ></input>
-        <label htmlFor="password" className="mt-10 mb-2">
-          Password<span className="text-ourred-500">*</span>
-        </label>
         <div className="relative">
           <button type="button" onClick={changepasswordtype}>
             {passwordtype === "password" ? (
@@ -99,14 +95,14 @@ const Loginform = () => {
             id="password"
             required
             maxLength={15}
-            className=" h-[50px] p-5 focus:outline-none text-[1rem] w-72 focus:border-[#0E0E11]"
+            className="h-[50px] p-2 focus:outline-none w-full text-[1rem] mobile:w-[400px] border-b-2"
             type={passwordtype}
-            placeholder="Enter Password"
+            placeholder="Password"
           ></input>
         </div>
         <button
           type="submit"
-          className=" flex items-center justify-center text-ourred-50 mt-10 bg-[#0E0E11] text-[1.2rem] sm:text-[1.5rem] pt-5 pb-5 max-h-9 min-h-9 hover:scale-[0.93] transition-transform duration-300"
+          className="rounded flex items-center justify-center text-ourred-50 mt-10 bg-ourred-700 text-[1.2rem] sm:text-[1.5rem] pt-5 pb-5 max-h-9 min-h-9 hover:scale-[0.93] transition-transform duration-300"
         >
           {isLoading ? <Spinner /> : "Login"}
         </button>

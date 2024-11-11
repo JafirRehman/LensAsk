@@ -59,40 +59,34 @@ const Signupform = () => {
     await createuser(formdata);
   }
   return (
-    <div className="bg-[#F1F2F3] px-32 py-10 self-start mt-7">
+    <div className="mt-10 mobile:mt-14">
+      <h1 className="font-bold text-[36px]">Create an Account</h1>
+      <h2>Enter your details below</h2>
       <form
         onSubmit={formhandler}
-        className="flex flex-col text-[1.2rem] mobile:text-[1.2rem]"
+        className="flex flex-col text-[1.2rem] mt-6 mobile:text-[1.2rem]"
       >
-        <label htmlFor="name" className="mt-2 mb-2">
-          Name<span className="text-ourred-500">*</span>
-        </label>
         <input
           onChange={changeformvalues}
           name="name"
           value={formdata.name}
           required
           id="name"
-          className=" mb-5 text-[1rem] h-[50px] p-5 focus:outline-none text-white"
+          className=" mb-7 text-[1rem] h-[50px] p-2 focus:outline-none  mobile:w-[400px] border-b-2 w-full"
           type="text"
-          placeholder="Enter name"
+          placeholder="Name"
         ></input>
-        <label htmlFor="email" className="mt-2 mb-2">
-          Email Address<span className="text-ourred-500">*</span>
-        </label>
+
         <input
           onChange={changeformvalues}
           name="email"
           value={formdata.email}
           required
           id="email"
-          className=" text-[1rem] h-[50px] p-5 focus:outline-none text-white"
+          className="mb-7 text-[1rem] h-[50px] p-2 focus:outline-none mobile:w-[400px] border-b-2 w-full"
           type="email"
-          placeholder="Enter Email Address"
+          placeholder="Email"
         ></input>
-        <label htmlFor="password" className="mt-5 mb-2">
-          Password<span className="text-ourred-500">*</span>
-        </label>
         <div className="relative">
           <button type="button" onClick={changepasswordtype}>
             {passwordtype === "password" ? (
@@ -108,16 +102,16 @@ const Signupform = () => {
             id="password"
             required
             maxLength={15}
-            className=" h-[50px] p-5 focus:outline-none text-[1rem] w-72"
+            className="h-[50px] focus:outline-none p-2 text-[1rem] w-full mobile:w-[400px] border-b-2"
             type={passwordtype}
-            placeholder="Enter Password"
+            placeholder="Password"
           ></input>
         </div>
         <button
           type="submit"
-          className=" flex items-center justify-center text-ourred-50 mt-10 bg-[#0E0E11] text-[1.2rem] sm:text-[1.5rem] pt-5 pb-5 max-h-9 min-h-9 hover:scale-[0.93] transition-transform duration-300"
+          className=" flex items-center justify-center text-ourred-50 mt-10 bg-ourred-700 rounded text-[1.2rem] sm:text-[1.5rem] pt-5 pb-5 max-h-9 min-h-9 hover:scale-[0.93] transition-transform duration-300"
         >
-          {isloading ? <Spinner /> : "Signup"}
+          {isloading ? <Spinner /> : "SignUp"}
         </button>
       </form>
     </div>

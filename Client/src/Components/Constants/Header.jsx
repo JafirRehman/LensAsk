@@ -3,7 +3,7 @@ import { useNavigate, Link, matchPath } from "react-router-dom";
 import { CiMenuFries } from "react-icons/ci";
 import { useSelector, useDispatch } from "react-redux";
 import { userlogoutReducer } from "../../redux/Slices/UserSlice";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
 import "../../styles/Header.scss";
@@ -51,6 +51,10 @@ const Header = () => {
   const matchRoutes = (routes) => {
     return matchPath(routes, location.pathname);
   };
+
+  useEffect(() => {
+    setShowMenu(false);
+  }, [location]);
 
   return (
     <header className="main-header sticky-header">
