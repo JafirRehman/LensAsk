@@ -73,7 +73,7 @@ const Products = () => {
               value={brand}
               id="brandfilter"
               name="brandfilter"
-              className="select select-bordered w-full sm:max-w-[20%]"
+              className="select select-bordered w-full rounded border p-2 border-solid sm:max-w-[20%]"
             >
               <option value="all">All Category</option>
               <option value="gucci">Gucci</option>
@@ -81,8 +81,8 @@ const Products = () => {
               <option value="dior">Dior</option>
               <option value="celine">Celine</option>
             </select>
-            <div className="mb-3 w-full sm:max-w-[20%]">
-              <div className="relative mb-4 flex w-full items-stretch">
+            <div className=" w-full sm:max-w-[20%]">
+              <div className="relative flex w-full items-stretch">
                 <input
                   onChange={(e) => setSearch(e.target.value)}
                   value={search}
@@ -120,7 +120,7 @@ const Products = () => {
               value={price}
               id="pricefilter"
               name="pricefilter"
-              className="select select-bordered w-full sm:max-w-[20%]"
+              className="select select-bordered w-full sm:max-w-[20%] rounded border p-2 border-solid"
             >
               <option value="700">All Price Ranges</option>
               <option value="200">200</option>

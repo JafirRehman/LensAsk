@@ -44,7 +44,6 @@ const Loginform = () => {
       }
       dispatch(updateuser(data.existeduser));
       toast.success(data.message);
-      console.log("Navigating to profile page...");
       navigate("/products");
     } catch (error) {
       console.error(error.message);
