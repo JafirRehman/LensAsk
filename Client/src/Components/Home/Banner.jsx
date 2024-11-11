@@ -4,13 +4,13 @@ import "../../styles/Banner.scss";
 const Banner = () => {
   const navigate = useNavigate();
   return (
-    <div className="hero-banner py-[80px] h-screen bg-black">
+    <div className="hero-banner">
       <div className="content">
         <div className="text-content">
           <h1>Style meets vision.</h1>
           <p>
-            Premium Clear And Aun Arescription Lenses, From Regular And Thin
-            Persol Signature Lenses To Our Top Line Of Premium Glass Lenses.
+            premium clear and sun prescription lenses, from regular and thin
+            Persol Signature lenses to our top line of Premium Glass lenses.
           </p>
           <div className="ctas">
             <button
