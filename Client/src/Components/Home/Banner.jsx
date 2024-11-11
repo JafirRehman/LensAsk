@@ -7,8 +7,8 @@ const Banner = () => {
     <div className="hero-banner py-[210px]">
       <div className="content">
         <div className="text-content">
-          <h1 className="mb-[50px] mobile:mb-[20px]">Style meets vision.</h1>
-          <p className="mb-[50px] mobile:mb-[20px]">
+          <h1 className="mb-[50px] sm:mb-[20px]">Style meets vision.</h1>
+          <p className="mb-[50px] sm:mb-[20px]">
             premium clear and sun prescription lenses, from regular and thin
             Persol Signature lenses to our top line of Premium Glass lenses.
           </p>

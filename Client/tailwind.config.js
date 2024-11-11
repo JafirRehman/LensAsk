@@ -20,7 +20,7 @@ export default {
         },
       },
       screens: {
-        mobile: "500px",
+        mobile: "425px",
       },
       animation: {
         "infinite-scroll": "infinite-scroll 45s linear infinite",
