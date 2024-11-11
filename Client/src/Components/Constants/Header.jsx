@@ -148,7 +148,7 @@ const Header = () => {
             )}
             <Link
               to="/user/profile"
-              className="flex items-center justify-between px-1 mobile:p-4 dark:bg-zinc-800"
+              className="flex items-center justify-between px-1 mobile:p-4"
             >
               <img
                 src={userState.user.image}
