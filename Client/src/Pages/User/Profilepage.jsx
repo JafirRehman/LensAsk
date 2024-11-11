@@ -46,7 +46,7 @@ const Profilepage = () => {
   const userState = useSelector((state) => state.user);
 
   return (
-    <div className="w-full mt-10">
+    <div className="w-full mt-9">
       {isLoading ? <Spinner /> : userState && <Intro userState={userState} />}
     </div>
   );
