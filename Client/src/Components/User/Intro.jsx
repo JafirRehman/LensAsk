@@ -16,11 +16,6 @@ const Intro = ({ userState }) => {
         <h2 className="text-sm text-center text-zinc-500">
           {userState.user.email}
         </h2>
-        {userState.user.role === "Customer" && (
-          <h3 className="text-3xl text-center mt-20 underline font-bold">
-            My Orders
-          </h3>
-        )}
       </div>
 
       {userState.user.role === "Customer" && <CusOrderspage />}

@@ -47,13 +47,16 @@ const CusOrdersList = () => {
       {isloading ? (
         <Spinner />
       ) : orders.length === 0 ? (
-        <div className="h-screen flex mt-28 justify-center bg-zinc-100 dark:bg-zinc-900">
-          <p className="bg-[#F1F2F3] self-start p-5 text-2xl text-center">
-            There Are No Orders!
+        <div className="mb-40 flex mt-28 justify-center">
+          <p className="bg-ourred-700 text-white self-start p-5 text-2xl text-center">
+            You Have No Orders!
           </p>
         </div>
       ) : (
-        <div>
+        <div className="max-w-[1332px] mx-auto">
+          <h3 className="text-3xl text-center mt-20 text-green-400 font-bold">
+            My Orders
+          </h3>
           {orders.map((order) => {
             return <Ordercomponent key={order._id} order={order} />;
           })}

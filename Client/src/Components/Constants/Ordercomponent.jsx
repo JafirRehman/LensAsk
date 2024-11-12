@@ -1,54 +1,52 @@
 /* eslint-disable react/prop-types */
-import { differenceInHours, parseISO } from "date-fns";
+
 const Ordercomponent = ({ order }) => {
   return (
-    <div className="bg-[#F2F1F3] max-w-[90%] mx-auto mobile:p-10 mt-10 mb-10 bg-white dark:bg-zinc-800 p-4">
-      <div className="flex relative items-center justify-between mb-4">
-        {differenceInHours(new Date(), parseISO(order.createdAt)) <= 24 && (
-          <div className=" absolute rounded-full -top-6 -left-8 bg-[#0E0E11] text-ourred-50 animate-bounce px-2 py-2 z-10 text-xs font-bold uppercase">
-            New
-          </div>
-        )}
-        <h2 className="text-lg">
-          <span className="text-[1.4rem] font-bold">Order ID:</span> #
-          {order._id}
+    <div className="p-4 sm:p-6 bg-white text-gray-800 rounded-lg shadow-md max-w-full sm:max-w-[90%] max-sm:mx-3 mx-auto mt-10 mb-10">
+      <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 space-y-2 sm:space-y-0">
+        <h2 className="text-md sm:text-lg font-semibold">
+          Order ID: <span className="text-blue-600">#{order._id}</span>
         </h2>
-        <span className="text-zinc-500 dark:text-zinc-400">
+        <span className="font-medium text-sm sm:text-base">
           Total Price: Rs. {order.totalPrice}
         </span>
       </div>
-      {order.products.map((pro) => (
-        <div key={pro.product._id} className="flex items-center mb-4">
-          <img
-            src={pro.product.image}
-            alt="Product Image"
-            className="w-12 h-12 rounded-lg mr-2"
-          />
-          <div>
-            <h3 className="text-sm font-semibold">
-              Product Name: {pro.product.title}
-            </h3>
-            <p className="text-zinc-500 dark:text-zinc-400">
-              Product ID: {pro.product._id}
-            </p>
-            <p className="text-zinc-500 dark:text-zinc-400">
-              Price: Rs. {pro.product.price}
-            </p>
-            <p className="text-zinc-500 dark:text-zinc-400">
-              Quantity: {pro.quantity}
-            </p>
+
+      {/* Items Section */}
+      <div className="mt-4 border-t border-gray-300 pt-4">
+        <h3 className="text-md font-semibold mb-2">Items:</h3>
+        {order.products.map((pro) => (
+          <div
+            key={pro.product._id}
+            className="flex flex-col sm:flex-row items-start sm:items-center bg-gray-50 rounded-lg p-3 sm:p-4 mb-3 shadow-sm"
+          >
+            <img
+              src={pro.product.image}
+              alt="Product"
+              className="w-20 h-20 rounded-lg mb-2 sm:mb-0 sm:mr-4"
+            />
+            <div className="flex-1 space-y-1 sm:space-y-0 sm:mr-4">
+              <p className="font-medium text-sm sm:text-base">
+                {pro.product.title}
+              </p>
+              <p className="text-xs text-gray-500">ID: {pro.product._id}</p>
+            </div>
+            <div className="flex flex-col items-start sm:items-end text-right">
+              <p className="font-medium text-sm sm:text-base">
+                Rs. {pro.product.price}
+              </p>
+              <p className="text-xs text-gray-500">Qty: {pro.quantity}</p>
+            </div>
           </div>
-        </div>
-      ))}
-      <div className="mt-4">
-        <h3 className="text-[1.3rem] font-bold">Receiver Details</h3>
-        <p className="text-zinc-500 dark:text-zinc-400 capitalize">
-          Receiver Name: {order.receiverName}
-        </p>
-        <p className="text-zinc-500 dark:text-zinc-400">Email: {order.email}</p>
-        <p className="text-zinc-500 dark:text-zinc-400">
-          Address: {order.address}
-        </p>
+        ))}
+      </div>
+
+      {/* Receiver Details Section */}
+      <div className="mt-4 border-t border-gray-300 pt-4">
+        <h3 className="text-md font-semibold">Receiver Details:</h3>
+        <p className="capitalize text-sm">Name: {order.receiverName}</p>
+        <p className="text-sm">Email: {order.email}</p>
+        <p className="text-sm">Address: {order.address}</p>
       </div>
     </div>
   );
