@@ -87,7 +87,7 @@ const Cartpage = () => {
               </p>
               <button
                 onClick={makepayment}
-                className="bg-[#0E0E11] text-ourred-50 text-md uppercase font-[600px] py-3 px-10 rounded-md hover:scale-90 transition-all duration-300"
+                className="bg-ourred-700 text-ourred-50 text-md uppercase font-[600px] py-3 px-10 rounded-md hover:scale-90 transition-all duration-300"
               >
                 {isLoading ? <Spinner status={true} /> : "CheckOut Now"}
               </button>
@@ -98,7 +98,7 @@ const Cartpage = () => {
         <div className="w-screen h-[calc(100vh-80px)] flex flex-col gap-6 justify-center items-center">
           <h1 className="font-[600] text-xl">Your Cart is Empty !</h1>
           <Link to={"/products"}>
-            <button className="bg-[#16a34a] text-white text-md uppercase font-[600] py-3 px-10 rounded-md border-[#16a34a] border-2 hover:bg-white hover:scale-75 transition-all duration-300">
+            <button className="bg-ourred-700 text-white text-md uppercase font-[600] py-3 px-10 rounded-md border-2 hover:scale-90 transition-all duration-300">
               Shop Now
             </button>
           </Link>

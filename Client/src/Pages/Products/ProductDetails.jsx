@@ -119,21 +119,24 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className="mx-auto p-4 h-screen max-w-[70%]">
+    <div className="mx-auto w-[95%] max-w-[1100px] h-screen sm:w-[90%] p-4">
       {product && (
-        <div className="flex flex-col md:flex-row h-[70%] mt-10 w-full">
-          <div className="flex w-[50%] justify-center items-center bg-[#F2F2F2]">
+        <div className="flex flex-col md:flex-row  h-[70%] mt-10 w-full justify-center items-center">
+          <div className="flex w-[50%] max-md:w-[90%] justify-center items-center bg-[#F2F2F2] min-w-[200px] max-w-[500px] h-[400px]">
             <img src={product.image} alt="product" className="" />
           </div>
-          <div className="w-[50%] flex flex-col justify-between ml-0 md:ml-8 mt-4 md:mt-0">
+          <div className="w-[50%] flex flex-col justify-between max-md:w-[90%] ml-0 md:ml-8 mt-4 md:mt-0">
             <h2 className="text-xl font-bold">{product.title}</h2>
             <p className="text-lg text-[15px] mt-2">{product.description}</p>
             <p className="mt-4 text-zinc-600 capitalize">{`Brand : ${product.category}`}</p>
-            <p className="mt-4 text-zinc-600">{`Rs . ${product.price}`}</p>
+            <p className="mt-4 text-zinc-600">
+              <span className="text-[#16a34a]">Rs : </span>
+              {`${product.price}`}
+            </p>
             <div className="mt-4">
               {userState?.user?.role !== "Admin" && (
                 <button
-                  className="bg-[#0E0E11] text-ourred-50 hover:scale-90 transition-all duration-200 h-10 w-40 rounded-lg mt-4"
+                  className="bg-ourred-700 text-ourred-50 hover:scale-90 transition-all duration-200 h-10 w-40 rounded-lg mt-4"
                   onClick={() => {
                     const isproduct = usercart?.some(
                       (pro) => pro?.product?._id === product?._id
