@@ -4,7 +4,7 @@ import CusOrderspage from "../../Pages/Customer/CusOrdersList";
 const Intro = ({ userState }) => {
   return (
     <>
-      <div className=" bg-white dark:bg-zinc-800 p-4 rounded-lg">
+      <div className=" p-4 rounded-lg">
         <img
           src={userState.user.image}
           alt="Profile Image"
