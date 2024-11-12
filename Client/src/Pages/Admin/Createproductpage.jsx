@@ -110,7 +110,7 @@ const Createproductpage = () => {
                 value={formdata.category}
                 required
                 id="category"
-                className=" text-[1rem] text-gray-400 mt-5 h-[50px] p-2 border-b focus:outline-none"
+                className=" text-[1rem] text-gray-400 mt-5 h-[50px] bg-transparent p-2 border-b focus:outline-none"
               >
                 <option value="">Category</option>
                 <option value="gucci">Gucci</option>
