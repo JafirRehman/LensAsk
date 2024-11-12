@@ -73,7 +73,7 @@ const Products = () => {
               value={brand}
               id="brandfilter"
               name="brandfilter"
-              className="select select-bordered bg-none w-full rounded border p-2 border-solid border-neutral-300 sm:max-w-[20%]"
+              className="select select-bordered bg-none w-full bg-transparent rounded border p-2 border-solid border-neutral-300 sm:max-w-[20%]"
             >
               <option value="all">All Category</option>
               <option value="gucci">Gucci</option>
@@ -120,7 +120,7 @@ const Products = () => {
               value={price}
               id="pricefilter"
               name="pricefilter"
-              className="select select-bordered bg-none w-full sm:max-w-[20%] border-neutral-300 rounded border p-2 border-solid"
+              className="select select-bordered bg-none w-full bg-transparent sm:max-w-[20%] border-neutral-300 rounded border p-2 border-solid"
             >
               <option value="700">All Price Ranges</option>
               <option value="200">200</option>

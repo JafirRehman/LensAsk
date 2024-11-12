@@ -84,7 +84,7 @@ const Product = ({ post }) => {
   };
 
   return (
-    <div className="flex flex-col rounded w-[261px] max-w-[261px] gap-3 hover:shadow-2xl hover:scale-[1.03] md:hover:scale-[1.05] transition ease-in">
+    <div className="flex flex-col rounded w-[330px] sm:w-[261px] gap-3 hover:shadow-2xl hover:scale-[1.03] md:hover:scale-[1.05] transition ease-in">
       <div className="bg-[#F2F2F2] rounded h-[300px] relative flex items-center justify-center">
         <img src={post.image} className="h-[170px] w-[170px]" alt="" />
         {differenceInHours(new Date(), parseISO(post.createdAt)) <= 24 && (
