@@ -72,7 +72,7 @@ const Header = () => {
               to="/"
               className={`${
                 matchRoutes("/") && "text-ourred-500"
-              } flex items-center text-3xl justify-center p-2 mb-6 rounded-lg border`}
+              } flex items-center text-xl justify-center p-2 mb-6 rounded-lg border`}
             >
               Home
             </Link>
@@ -80,7 +80,7 @@ const Header = () => {
               to="/products"
               className={`${
                 matchRoutes("/products") && " text-ourred-500"
-              } flex items-center text-3xl justify-center p-2 mb-6 rounded-lg border`}
+              } flex items-center text-xl justify-center p-2 mb-6 rounded-lg border`}
             >
               All Products
             </Link>
@@ -90,7 +90,7 @@ const Header = () => {
                   to="/user/allorders"
                   className={`${
                     matchRoutes("/user/allorders") && " text-ourred-500"
-                  } flex items-center text-3xl justify-center p-2 mb-6 rounded-lg border`}
+                  } flex items-center text-xl justify-center p-2 mb-6 rounded-lg border`}
                 >
                   All Orders
                 </Link>
@@ -98,7 +98,7 @@ const Header = () => {
                   to="/user/createproduct"
                   className={`${
                     matchRoutes("/user/createproduct") && "text-ourred-500"
-                  } flex items-center text-3xl justify-center p-2 mb-6 rounded-lg border`}
+                  } flex items-center text-xl justify-center p-2 mb-6 rounded-lg border`}
                 >
                   Create Product
                 </Link>
@@ -106,7 +106,7 @@ const Header = () => {
             )}
             {userState.user && (
               <Link
-                className={`flex items-center text-3xl justify-center p-2 mt-7 rounded-lg border`}
+                className={`flex items-center text-xl justify-center p-2 mt-7 rounded-lg border`}
                 onClick={logoutfunc}
               >
                 Logout
@@ -118,7 +118,7 @@ const Header = () => {
                   to="/login"
                   className={`${
                     matchRoutes("/login") && "rounded-lg border text-ourred-500"
-                  } flex-1 text-center text-3xl p-2 mb-2 rounded-lg border`}
+                  } flex-1 text-center text-xl p-2 mb-2 rounded-lg border`}
                 >
                   Login
                 </Link>
@@ -126,7 +126,7 @@ const Header = () => {
                   to="/signup"
                   className={`${
                     matchRoutes("/signup") && " text-ourred-500"
-                  } flex-1 text-center text-3xl p-2 mb-2 rounded-lg border`}
+                  } flex-1 text-center text-xl p-2 mb-2 rounded-lg border`}
                 >
                   SignUp
                 </Link>

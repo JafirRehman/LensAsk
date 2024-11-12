@@ -73,7 +73,7 @@ const Products = () => {
               value={brand}
               id="brandfilter"
               name="brandfilter"
-              className="select select-bordered w-full rounded border p-2 border-solid sm:max-w-[20%]"
+              className="select select-bordered bg-none w-full rounded border p-2 border-solid border-neutral-300 sm:max-w-[20%]"
             >
               <option value="all">All Category</option>
               <option value="gucci">Gucci</option>
@@ -97,7 +97,7 @@ const Products = () => {
 
                 {/* <!--Search icon--> */}
                 <span
-                  className="input-group-text flex items-center whitespace-nowrap rounded px-3 py-1.5 text-center text-base font-normal text-neutral-700 dark:text-neutral-200"
+                  className="input-group-text flex items-center whitespace-nowrap rounded px-3 py-1.5 text-center text-base font-normal"
                   id="basic-addon2"
                 >
                   <svg
@@ -120,7 +120,7 @@ const Products = () => {
               value={price}
               id="pricefilter"
               name="pricefilter"
-              className="select select-bordered w-full sm:max-w-[20%] rounded border p-2 border-solid"
+              className="select select-bordered bg-none w-full sm:max-w-[20%] border-neutral-300 rounded border p-2 border-solid"
             >
               <option value="700">All Price Ranges</option>
               <option value="200">200</option>

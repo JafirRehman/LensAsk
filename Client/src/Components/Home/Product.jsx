@@ -1,11 +1,14 @@
 /* eslint-disable react/prop-types */
-import toast from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { differenceInHours, parseISO } from "date-fns";
-import Spinner from "../Constants/Spinner";
+import { IoAddOutline } from "react-icons/io5";
+import { FiEye } from "react-icons/fi";
+import { FiMinus } from "react-icons/fi";
 import { useState } from "react";
 import { updateuser } from "../../redux/Slices/UserSlice";
+import Spinner from "../Constants/Spinner";
+import toast from "react-hot-toast";
 
 const Product = ({ post }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -81,51 +84,45 @@ const Product = ({ post }) => {
   };
 
   return (
-    <div className="flex flex-col w-[261px] max-w-[261px] gap-3 hover:shadow-2xl hover:scale-[1.03] md:hover:scale-[1.05] transition ease-in">
-      <div className="bg-[#F2F2F2] h-[300px] relative flex items-center justify-center">
-        <img
-          src={post.image}
-          className="opacity-100 hover:opacity-0 mix-blend-multiply h-[170px] w-[170px]"
-          alt=""
-        />
+    <div className="flex flex-col rounded w-[261px] max-w-[261px] gap-3 hover:shadow-2xl hover:scale-[1.03] md:hover:scale-[1.05] transition ease-in">
+      <div className="bg-[#F2F2F2] rounded h-[300px] relative flex items-center justify-center">
+        <img src={post.image} className="h-[170px] w-[170px]" alt="" />
         {differenceInHours(new Date(), parseISO(post.createdAt)) <= 24 && (
-          <div className=" absolute rounded-full top-5 right-2 bg-[#0E0E11] text-ourred-50 animate-bounce text-white px-2 py-1 z-10 text-xs font-bold uppercase">
+          <div className="rounded absolute top-4 left-2 bg-ourred-700 text-ourred-50 animate-bounce px-2 py-1 z-10 text-xs font-bold uppercase">
             New
           </div>
         )}
-        <div className="absolute opacity-0 hover:opacity-100 backdrop-blur-md bg-white/30 flex flex-col gap-5 justify-center items-center w-full h-full">
+        {userState?.user?.role !== "Admin" && userState && (
           <button
-            onClick={() => navigate(`/productsdetails/${post._id}`)}
-            className="text-gray-700 border-2 border-gray-700 rounded-md font-semibold text-[12px] h-10 w-40 uppercase hover:bg-gray-700 hover:text-white transition duration-300 ease-in"
+            className="rounded-full text-black absolute top-3 right-3 bg-white flex items-center justify-center z-10 text-xs w-8 h-8"
+            onClick={() => {
+              const isproduct = usercart?.some(
+                (pro) => pro?.product?._id === post._id
+              );
+              isproduct ? removefromCart(post._id) : addToCart(post._id);
+            }}
           >
-            Details
-          </button>
-          {userState?.user?.role !== "Admin" &&
-            (usercart?.length > 0 &&
-            usercart?.some((pro) => pro?.product?._id === post._id) ? (
-              <button
-                className="text-gray-700 border-2 border-gray-700 rounded-md font-semibold text-[12px] h-10 w-40 uppercase hover:bg-gray-700 hover:text-white transition duration-300 ease-in"
-                onClick={() => {
-                  removefromCart(post._id);
-                }}
-              >
-                {isLoading ? <Spinner status={true} /> : "Remove Item"}
-              </button>
+            {isLoading ? (
+              <Spinner status={true} />
+            ) : usercart?.some((pro) => pro?.product?._id === post._id) ? (
+              <FiMinus className="text-base text-ourred-700 font-bold" />
             ) : (
-              <button
-                className="text-gray-700 border-2 border-gray-700 rounded-md font-semibold text-[12px] h-10 w-40 uppercase hover:bg-gray-700 hover:text-white transition duration-300 ease-in"
-                onClick={() => {
-                  addToCart(post._id);
-                }}
-              >
-                {isLoading ? <Spinner status={true} /> : "Add to Cart"}
-              </button>
-            ))}
-        </div>
+              <IoAddOutline className="text-base text-ourred-700 font-bold" />
+            )}
+          </button>
+        )}
+        <button
+          onClick={() => navigate(`/productsdetails/${post._id}`)}
+          className={`${
+            userState?.user?.role === "Admin" ? "top-3" : "top-16"
+          } rounded-full text-black absolute top-16 right-3 bg-white flex items-center justify-center z-10 text-xs w-8 h-8`}
+        >
+          <FiEye className="text-base font-bold" />
+        </button>
       </div>
       <div className="text-[1rem]">
         <p className="font-bold  text-left truncate mt-1">{post.title}</p>
-        <p className="text-green-600 font-semibold">Rs. {post.price}</p>
+        <p className="text-ourred-700 font-semibold">Rs. {post.price}</p>
       </div>
     </div>
   );
