@@ -11,7 +11,6 @@ import Createproductpage from "./Pages/Admin/Createproductpage.jsx";
 import ProductDetails from "./Pages/Products/ProductDetails.jsx";
 import Transectionfail from "./Pages/Stripe/Transectionfail.jsx";
 import Transectionsuccess from "./Pages/Stripe/Transectionsuccess.jsx";
-// import CreateOrderpage from "./Pages/Customer/CreateOrderpage.jsx";
 import ProtectedRoutes from "./middlewares/ProtectedRoutes.jsx";
 import AdminRoutes from "./middlewares/AdminRoutes.jsx";
 import ProtectedAuthRoutes from "./middlewares/ProtectedAuthRoutes.jsx";
