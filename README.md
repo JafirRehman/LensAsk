@@ -76,21 +76,29 @@
 
    **Backend `.env`**
    ```
-   MONGO_URI=your_mongodb_uri
-   JWT_SECRET=your_jwt_secret
-   STRIPE_SECRET_KEY=your_stripe_secret_key
-   CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-   CLOUDINARY_API_KEY=your_cloudinary_api_key
-   CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-   EMAIL_SERVICE=your_email_service
-   EMAIL_USER=your_email_address
-   EMAIL_PASS=your_email_password
+    MONGODB_URL=your_mongodb_uri
+    JWT_SECRET=your_jwt_secret
+
+    STRIPE_SECRET_KEY=your_stripe_secret_key
+    STRIPE_SIGNING_SECRET=your_stripe_signing_secret
+
+    CLOUD_NAME=your_cloudinary_cloud_name
+    FOLDER_NAME=your_media_folder_name
+    API_KEY=your_cloudinary_api_key
+    API_SECRET=your_cloudinary_api_secret
+
+    MAIL_HOST=your_email_service
+    MAIL_USER=your_email_address
+    MAIL_PASS=your_email_password
+
+    PORT=your_backend_server_port
+    FRONTEND_BASE_URL=your_frontend_base_url
    ```
 
    **Frontend `.env`**
    ```
-   REACT_APP_API_URL=http://localhost:5000
-   REACT_APP_STRIPE_PUBLIC_KEY=your_stripe_public_key
+   VITE_API_BACKEND_BASE_URL=your_backend_url
+   VITE_LOAD_STRIP_API=your_stripe_public_key
    ```
 
 4. **Run the development servers**
@@ -105,7 +113,7 @@
    ```
 
 5. **Access the app**  
-   - Frontend: [http://localhost:3000](http://localhost:3000)  
+   - Frontend: [http://localhost:5173](http://localhost:5173)  
    - Backend: [http://localhost:5000](http://localhost:5000)
 
 ---
@@ -143,21 +151,10 @@ Feel free to fork the repository and submit pull requests. For significant chang
 ## 🧑‍💻 Author
 
 **Jafir Rehman**  
-[GitHub Profile](https://github.com/JafirRehman)  
-[Portfolio/LinkedIn/etc.] (Add links if applicable)
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+[GitHub Profile](https://github.com/JafirRehman) 
 
 ---
 
 ## 📷 Screenshots
 
 *(Add screenshots or GIFs of your project to enhance the README)*
-
---- 
-
-This structure covers all essential details about your project and ensures readability for developers viewing it on GitHub.
