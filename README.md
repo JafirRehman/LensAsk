@@ -7,9 +7,9 @@
 ## 🚀 Features
 
 ### User Features
+
 - **Product Listings & Detail Pages**  
   Browse a variety of products with detailed descriptions, prices, and images.
-  
 - **Search & Filter**  
   Search for products and refine results by price, brand, and category.
 
@@ -20,10 +20,12 @@
   Subscribe to receive email notifications about new product launches.
 
 ### Admin Features
+
 - **Admin Dashboard**  
   Manage orders, create new products, and oversee the e-commerce workflow.
 
 ### Image Management
+
 - **Cloudinary Integration**  
   Efficiently handle product image uploads and storage.
 
@@ -32,10 +34,12 @@
 ## 🛠️ Technologies Used
 
 ### Frontend
+
 - **React.js** (as part of the MERN stack)
 - **Tailwind CSS** for styling
 
 ### Backend
+
 - **Node.js** and **Express.js**
 - **MongoDB** for database management
 - **Stripe** for payment processing
@@ -47,6 +51,7 @@
 ## 📚 Installation and Setup
 
 ### Prerequisites
+
 - Node.js (>= 14.x)
 - MongoDB (local or cloud instance)
 - Stripe account for API keys
@@ -55,12 +60,14 @@
 ### Steps to Set Up Locally
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/JafirRehman/LensAsk.git
    cd LensAsk
    ```
 
 2. **Install dependencies**
+
    ```bash
    # For backend
    cd backend
@@ -75,6 +82,7 @@
    Create `.env` files in both `backend` and `frontend` directories with the following variables:
 
    **Backend `.env`**
+
    ```
     MONGODB_URL=your_mongodb_uri
     JWT_SECRET=your_jwt_secret
@@ -96,12 +104,14 @@
    ```
 
    **Frontend `.env`**
+
    ```
    VITE_API_BACKEND_BASE_URL=your_backend_url
    VITE_LOAD_STRIP_API=your_stripe_public_key
    ```
 
 4. **Run the development servers**
+
    ```bash
    # Backend
    cd backend
@@ -112,8 +122,8 @@
    npm start
    ```
 
-5. **Access the app**  
-   - Frontend: [http://localhost:5173](http://localhost:5173)  
+5. **Access the app**
+   - Frontend: [http://localhost:5173](http://localhost:5173)
    - Backend: [http://localhost:5000](http://localhost:5000)
 
 ---
@@ -121,9 +131,11 @@
 ## 🌐 Deployment
 
 ### Frontend
+
 - Deployed on **Vercel**: [LensAsk Frontend](https://asklens-three.vercel.app)
 
 ### Backend
+
 - Deployed on **Render**: [LensAsk Backend](https://lensask-backend.onrender.com)
 
 ---
@@ -151,10 +163,32 @@ Feel free to fork the repository and submit pull requests. For significant chang
 ## 🧑‍💻 Author
 
 **Jafir Rehman**  
-[GitHub Profile](https://github.com/JafirRehman) 
+[GitHub Profile](https://github.com/JafirRehman)
 
 ---
 
 ## 📷 Screenshots
 
-*(Add screenshots or GIFs of your project to enhance the README)*
+### 1. **Customer Profile Page**
+
+The profile page allows users to view their account details also the order they have placed.
+
+![Customer Profile Page](https://res.cloudinary.com/dxrnq0wcs/image/upload/v1732175131/project%20ScreenShots/screencapture-asklens-three-vercel-app-user-profile-2024-11-21-12_14_56_rwukog.png)
+
+---
+
+### 2. **Admin All Orders Page**
+
+Admins can view and manage all customer orders in one place.
+
+![Admin All Orders Page](https://res.cloudinary.com/dxrnq0wcs/image/upload/v1732175130/project%20ScreenShots/screencapture-asklens-three-vercel-app-user-allorders-2024-11-21-12_16_42_oofhzu.png)
+
+---
+
+### 3. **Admin Create Product Page**
+
+Admins can add new products to the store with ease using this page.
+
+![Admin Create Product Page](https://res.cloudinary.com/dxrnq0wcs/image/upload/v1732175125/project%20ScreenShots/screencapture-asklens-three-vercel-app-user-createproduct-2024-11-21-12_39_51_m7q0ed.png)
+
+---
