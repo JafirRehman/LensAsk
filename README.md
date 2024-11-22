@@ -177,7 +177,7 @@ The Home Page.
 
 ---
 
-### 1. **All Products Page**
+### 2. **All Products Page**
 
 The is the Page where every user can see All Products.
 
@@ -185,7 +185,15 @@ The is the Page where every user can see All Products.
 
 ---
 
-### 1. **Customer Profile Page**
+### 3. **Product Details Page**
+
+The is the Page where user can see product details.
+
+![Product Details Page](https://res.cloudinary.com/dxrnq0wcs/image/upload/v1732301797/project%20ScreenShots/screencapture-asklens-three-vercel-app-productsdetails-6644b7335eeca2348aaba14f-2024-11-22-23_55_56_doflt0.png)
+
+---
+
+### 4. **Customer Profile Page**
 
 The profile page allows users to view their account details also the order they have placed.
 
@@ -193,7 +201,7 @@ The profile page allows users to view their account details also the order they 
 
 ---
 
-### 2. **Admin All Orders Page**
+### 5. **Admin All Orders Page**
 
 Admins can view and manage all customer orders in one place.
 
@@ -201,7 +209,7 @@ Admins can view and manage all customer orders in one place.
 
 ---
 
-### 3. **Admin Create Product Page**
+### 6. **Admin Create Product Page**
 
 Admins can add new products to the store with ease using this page.
 
