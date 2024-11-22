@@ -169,6 +169,22 @@ Feel free to fork the repository and submit pull requests. For significant chang
 
 ## 📷 Screenshots
 
+### 1. **Home Page**
+
+The Home Page.
+
+![Home Page](https://res.cloudinary.com/dxrnq0wcs/image/upload/v1732301430/project%20ScreenShots/screencapture-asklens-three-vercel-app-2024-11-22-23_46_49_gydacj.png)
+
+---
+
+### 1. **All Products Page**
+
+The is the Page where every user can see All Products.
+
+![All Products Page](https://res.cloudinary.com/dxrnq0wcs/image/upload/v1732301331/project%20ScreenShots/screencapture-asklens-three-vercel-app-products-2024-11-22-23_47_51_nneewh.png)
+
+---
+
 ### 1. **Customer Profile Page**
 
 The profile page allows users to view their account details also the order they have placed.
