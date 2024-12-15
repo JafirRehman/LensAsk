@@ -31,9 +31,9 @@ const Createproductpage = () => {
       return;
     }
     try {
-      const FormData = new FormData();
+      const formData = new FormData();
       Object.keys(formdata).forEach((key) => {
-        FormData.append(key, formdata[key]);
+        formData.append(key, formdata[key]);
       });
 
       let response = await fetch(
@@ -41,7 +41,7 @@ const Createproductpage = () => {
         {
           method: "POST",
           credentials: "include",
-          body: FormData,
+          body: formData,
         }
       );
       const data = await response.json();
@@ -66,6 +66,7 @@ const Createproductpage = () => {
     <div className="h-screen w-full pt-10 sm:px-5 px-5 max-w-[1250px] mx-auto flex justify-center">
       <div className="self-start py-3 w-full mx-auto ">
         <form
+          encType="multipart/form-data"
           onSubmit={formhandler}
           className="flex mx-auto flex-col text-[1.2rem] w-full sm:w-96 mobile:text-[1.2rem] mobile:w-[400px]"
         >
