@@ -3,10 +3,6 @@ import { useSelector } from "react-redux";
 
 const AdminRoutes = () => {
   const { user } = useSelector((state) => state.user);
-  return user && user.role === "Admin" ? (
-    <Outlet />
-  ) : (
-    <Navigate to="/" replace />
-  );
+  return user && user.role === "Admin" ? <Outlet /> : <Navigate to="/" />;
 };
 export default AdminRoutes;
