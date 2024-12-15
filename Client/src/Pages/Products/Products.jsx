@@ -5,7 +5,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 const Products = () => {
   const [brand, setBrand] = useState("all");
-  const [price, setPrice] = useState("700");
+  const [price, setPrice] = useState(null);
   const [search, setSearch] = useState("");
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -53,9 +53,14 @@ const Products = () => {
     producttoshow = products.filter((product) => product.category === brand);
   }
   // price filter
-  let pricefilterproducts = producttoshow.filter(
-    (eachproduct) => eachproduct.price <= price
-  );
+  let pricefilterproducts;
+  if (price) {
+    pricefilterproducts = producttoshow.filter(
+      (eachproduct) => eachproduct.price <= price
+    );
+  } else {
+    pricefilterproducts = producttoshow;
+  }
   // search filter
   let searchfilterproducts = pricefilterproducts.filter((eachproduct) =>
     eachproduct.title.toLowerCase().includes(search.toLowerCase())
@@ -122,31 +127,19 @@ const Products = () => {
               name="pricefilter"
               className="select select-bordered bg-none w-full bg-transparent sm:max-w-[20%] border-neutral-300 rounded border p-2 border-solid"
             >
-              <option value="700">All Price Ranges</option>
+              <option value={null}>All Price Ranges</option>
               <option value="200">200</option>
               <option value="300">300</option>
               <option value="400">400</option>
               <option value="500">500</option>
-              <option value="500">600</option>
+              <option value="600">600</option>
             </select>
           </div>
           <div className="flex justify-center flex-col mobile:flex-row mobile:flex-wrap gap-5 items-center max-w-6xl p-6 mx-auto my-7 min-h-[80vh]">
-            {producttoshow.length > 0 ? (
-              pricefilterproducts.length > 0 ? (
-                searchfilterproducts.length > 0 ? (
-                  searchfilterproducts.map((product) => (
-                    <Product key={product._id} post={product} />
-                  ))
-                ) : (
-                  <div className="h-screen flex justify-center pt-40">
-                    <p className="font-bold">No Products to Show</p>
-                  </div>
-                )
-              ) : (
-                <div className="w-screen h-screen flex justify-center pt-40">
-                  <p className="font-bold">No Products to Show</p>
-                </div>
-              )
+            {searchfilterproducts.length > 0 ? (
+              searchfilterproducts.map((product) => (
+                <Product key={product._id} post={product} />
+              ))
             ) : (
               <div className="h-screen flex justify-center pt-40">
                 <p className="font-bold">No Products to Show</p>
