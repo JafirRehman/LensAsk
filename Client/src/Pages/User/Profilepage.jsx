@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { updateuser } from "../../redux/Slices/UserSlice";
 
 const Profilepage = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
