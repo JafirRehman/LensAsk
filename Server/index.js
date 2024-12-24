@@ -19,7 +19,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
-// Connecting to database and cloudinary
+// Connet database and cloudinary
 connectDB();
 cloudinaryConnect();
 // Middlewares
@@ -38,7 +38,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// Use the webhook route with express.raw() middleware
+// Use webhook route
 app.use("/webhook", WebHook_route);
 
 // Use JSON middleware for all other routes
@@ -52,7 +52,6 @@ app.use("/customer", auth, isCustomer, OnlyCustomer_routes);
 
 const PORT = process.env.PORT;
 
-// Listening to the server
 app.listen(PORT, () => {
   console.log(`App is running at ${PORT}`);
 });
