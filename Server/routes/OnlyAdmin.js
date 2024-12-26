@@ -1,5 +1,5 @@
 const express = require("express");
-
+// import handlers
 const { getAllOrders, createProduct } = require("../Controllers/OnlyAdmin");
 
 const router = express.Router();
