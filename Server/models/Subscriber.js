@@ -1,13 +1,13 @@
-const mongoose = require('mongoose');
-const express=require('express')
-
+const mongoose = require("mongoose");
+const express = require("express");
+// Define the schema
 const SubscriberSchema = new mongoose.Schema({
-    email: {
-        type: String,
-        required: true,
-        unique:true
-    }
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
 });
 
-const Subscriber = mongoose.model('Subscriber', SubscriberSchema);
-module.exports = Subscriber
+const Subscriber = mongoose.model("Subscriber", SubscriberSchema);
+module.exports = Subscriber;
