@@ -6,20 +6,18 @@ const jwt = require("jsonwebtoken");
 // LOGIN
 exports.login = async (req, res) => {
   try {
-    //get the data
     const { email, password } = req.body;
-    //validate
+
     if (!email || !password) {
       throw new Error("All fields are required!");
     }
-    //check user already exist
+
     const existeduser = await User.findOne({ email }).populate("cart.product");
     if (!existeduser) {
       throw new Error("User not found!");
     }
-    //check password match with hasspassword
+
     if (await bcrypt.compare(password, existeduser.password)) {
-      //create jwt token
       const token = jwt.sign(
         {
           email: existeduser.email,
@@ -31,9 +29,8 @@ exports.login = async (req, res) => {
           expiresIn: "24h",
         }
       );
-      //set that token in user object and set password to undefined
+
       existeduser.password = undefined;
-      //create options for cookie
       const options = {
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
         httpOnly: true,
